@@ -30,9 +30,17 @@ void Scene::renderGUI()
 	// TODO: implement later
 }
 
-Scene::Scene(std::vector<GameObject*> gameObjects)
+mge::Scene::Scene(sf::String name)
 {
-	this->gameObjects = gameObjects;
+	this->name = name;
+}
+
+void mge::Scene::load()
+{
+	for (auto gameObject : gameObjects)
+	{
+		gameObject->init();
+	}
 }
 
 void Scene::update()
@@ -50,6 +58,11 @@ void Scene::render()
 void Scene::addGameObject(GameObject* gameObject)
 {
 	this->gameObjects.push_back(gameObject);
+}
+
+void mge::Scene::setGameObjects(std::vector<GameObject*> gameObjects)
+{
+	this->gameObjects = gameObjects;
 }
 
 void Scene::setWindow(sf::RenderWindow* window)
