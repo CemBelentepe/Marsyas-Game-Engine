@@ -1,5 +1,7 @@
 #include "GameObject.h"
 
+using namespace mge;
+
 void GameObject::initVariables()
 {
 	this->sprite = new sf::Sprite();

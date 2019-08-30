@@ -1,5 +1,7 @@
 #include "Scene.h"
 
+using namespace mge;
+
 void Scene::updateGameObjects()
 {
 	// TODO: optimize

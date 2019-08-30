@@ -1,32 +1,35 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include "SFML/Graphics.hpp"
 #include <map>
 
-class Input
+namespace mge
 {
-private:
-	sf::RenderWindow* window;
+	class Input
+	{
+	private:
+		static sf::RenderWindow* window;
 
-	std::map<sf::Keyboard::Key, int> keyState;
-	std::map<sf::Mouse::Button, int> mouseButtonState;
+		static std::map<sf::Keyboard::Key, int> keyState;
+		static std::map<sf::Mouse::Button, int> mouseButtonState;
 
-public:
-	Input(sf::RenderWindow* window);
+	public:
+		Input() {}
 
-	void setWindow(sf::RenderWindow* window);
+		static void start(sf::RenderWindow* window);
 
-	void reset();
+		static void setWindow(sf::RenderWindow* window);
+		static void reset();
 
-	void updateMouseButtonPressed(sf::Mouse::Button button, int value);
-	void updateKeyPressed(sf::Keyboard::Key key, int value);
+		static void updateMouseButtonPressed(sf::Mouse::Button button, int value);
+		static void updateKeyPressed(sf::Keyboard::Key key, int value);
 
-	sf::Vector2i getMousePosition();
-	bool isMouseButtonPressed(sf::Mouse::Button button);
-	bool getMouseButtonDown(sf::Mouse::Button button);
-	bool getMouseButtonUp(sf::Mouse::Button button);
+		static sf::Vector2i getMousePosition();
+		static bool isMouseButtonPressed(sf::Mouse::Button button);
+		static bool getMouseButtonDown(sf::Mouse::Button button);
+		static bool getMouseButtonUp(sf::Mouse::Button button);
 
-	bool isKeyPressed(sf::Keyboard::Key key);
-	bool getKeyDown(sf::Keyboard::Key key);
-	bool getKeyUp(sf::Keyboard::Key key);
-};
-
+		static bool isKeyPressed(sf::Keyboard::Key key);
+		static bool getKeyDown(sf::Keyboard::Key key);
+		static bool getKeyUp(sf::Keyboard::Key key);
+	};
+}

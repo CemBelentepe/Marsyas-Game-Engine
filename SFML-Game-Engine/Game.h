@@ -1,35 +1,43 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include <iostream>
+#include "SFML/Graphics.hpp"
 #include "Scene.h"
 #include "Input.h"
 
-class Game
+namespace mge
 {
-private:
-	sf::VideoMode videoMode;
-	sf::RenderWindow window;
-	sf::String title;
+	class Game
+	{
+	private:
+		static sf::VideoMode videoMode;
+		static sf::RenderWindow window;
+		static sf::String title;
 
-	Input* input = nullptr;
+		static sf::Clock clock;
+		static sf::Time tDeltaTime;
 
-	std::vector<Scene*> scenes;
-	Scene* activeScene;
-	int activeSceneID;
+		static std::vector<Scene*> scenes;
+		static Scene* activeScene;
+		static int activeSceneID;
 
-	void initScenes(std::vector<Scene*> scenes);
+		static void initScenes(std::vector<Scene*> scenes);
 
-	void updateEvents();
-	void update();
-	void render();
+		static void updateEvents();
+		static void update();
+		static void render();
 
-public:
-	Game(const char* title, int width, int height, std::vector<Scene*> scenes, bool fullscreen = false);
-	//virtual ~Game();
+	public:
+		static float deltaTime;
 
-	void createWindow(const char* title, int width, int height, bool fullscreen = false);
-	void startEngine(int startSceneID = 0);
-	
-	void addScene(Scene* scene);
-	void setScene(int sceneID);
-};
+		Game() {}
+		//virtual ~Game();
+
+		static void loadScenes(std::vector<Scene*> scenes);
+		static void createWindow(const char* title, int width, int height, bool fullscreen = false);
+		static void startEngine(int startSceneID = 0);
+
+		static void addScene(Scene* scene);
+		static void setScene(int sceneID);
+		static void setScene(Scene* scene);
+	};
+}

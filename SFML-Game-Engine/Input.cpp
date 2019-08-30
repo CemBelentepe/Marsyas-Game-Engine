@@ -1,13 +1,21 @@
 #include "Input.h"
 
-Input::Input(sf::RenderWindow* window)
+using namespace mge;
+
+sf::RenderWindow* Input::window = nullptr;
+
+std::map<sf::Keyboard::Key, int> Input::keyState;
+std::map<sf::Mouse::Button, int> Input::mouseButtonState;
+
+void Input::start(sf::RenderWindow* window)
 {
-	this->window = window;
+	Input::setWindow(window);
+	Input::reset();
 }
 
 void Input::setWindow(sf::RenderWindow* window)
 {
-	this->window = window;
+	Input::window = window;
 }
 
 void Input::reset()
@@ -31,7 +39,7 @@ void Input::updateKeyPressed(sf::Keyboard::Key key, int value)
 
 sf::Vector2i Input::getMousePosition()
 {
-	return sf::Mouse::getPosition(*this->window);
+	return sf::Mouse::getPosition(*Input::window);
 }
 
 bool Input::isMouseButtonPressed(sf::Mouse::Button button)

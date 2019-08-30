@@ -1,15 +1,17 @@
 #pragma once
 
-class GameObject;
-
-class Component
+namespace mge
 {
-private:
-	GameObject* gameObject;
-public:
-	Component(GameObject* gameObject);
-	virtual ~Component();
+	class GameObject;
 
-	void update();
-};
+	class Component
+	{
+	protected:
+		GameObject* gameObject;
+	public:
+		Component(GameObject* gameObject);
+		virtual ~Component();
 
+		virtual void update();
+	};
+}

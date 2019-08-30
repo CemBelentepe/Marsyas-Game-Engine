@@ -1,8 +1,8 @@
-﻿  Game.cpp
+﻿  Component.cpp
+  Game.cpp
   GameObject.cpp
+  Input.cpp
   main.cpp
   Scene.cpp
-  Compiling...
   Generating Code...
-Game.obj : error LNK2019: unresolved external symbol "public: void __cdecl Scene::render(void)" (?render@Scene@@QEAAXXZ) referenced in function "private: void __cdecl Game::render(void)" (?render@Game@@AEAAXXZ)
-C:\Users\cemal\Source\Repos\theCCB\SFML-Game-Engine\x64\Debug\SFML-Game-Engine.exe : fatal error LNK1120: 1 unresolved externals
+  SFML-Game-Engine.vcxproj -> P:\Repos\GitHub\SFML-Game-Engine\theCCB\SFML-Game-Engine\x64\Debug\SFML-Game-Engine.exe
