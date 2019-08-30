@@ -3,6 +3,7 @@
 #include "SFML/Graphics.hpp"
 #include "Scene.h"
 #include "Input.h"
+#include "Debug.h"
 
 namespace mge
 {
@@ -14,7 +15,6 @@ namespace mge
 		static sf::String title;
 
 		static sf::Clock clock;
-		static sf::Time tDeltaTime;
 
 		static std::vector<Scene*> scenes;
 		static Scene* activeScene;
@@ -27,6 +27,7 @@ namespace mge
 		static void render();
 
 	public:
+		static sf::Time tDeltaTime;
 		static float deltaTime;
 
 		Game() {}

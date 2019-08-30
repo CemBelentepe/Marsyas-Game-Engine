@@ -4,7 +4,7 @@ using namespace mge;
 
 void GameObject::initVariables()
 {
-	this->sprite = new sf::Sprite();
+	this->name = "GameObject";
 	this->pos = sf::Vector2f(0, 0);
 	this->scale = sf::Vector2f(1, 1);
 	this->rotation = 0;
@@ -18,19 +18,33 @@ void GameObject::updateComponents()
 	}
 }
 
-GameObject::GameObject(sf::Texture* texture, sf::Vector2f pos)
+GameObject::GameObject(sf::String name, sf::Vector2f pos)
 {
 	this->initVariables();
-	this->sprite->setTexture(*texture);
-	this->sprite->setPosition(pos);
+	this->name = name;
+	this->renderer.setTexture("default");
+	this->renderer.setPosition(pos);
 }
 
-GameObject::GameObject(sf::Texture* texture, sf::Vector2f pos, sf::IntRect textureRect)
+mge::GameObject::GameObject(sf::String name, sf::String textureName, sf::Vector2f pos)
 {
 	this->initVariables();
-	this->sprite->setTexture(*texture);
-	this->sprite->setPosition(pos);
-	this->sprite->setTextureRect(textureRect);
+	this->name = name;
+	this->renderer.setTexture(textureName);
+	this->pos = pos;
+}
+
+mge::GameObject::GameObject(sf::String name, sf::String textureName, sf::IntRect textureRect, sf::Vector2f pos)
+{
+	this->initVariables();
+	this->name = name;
+	this->renderer.setTexture(textureName, textureRect);
+	this->pos = pos;
+}
+
+void mge::GameObject::init()
+{
+	this->render.
 }
 
 void GameObject::update()
@@ -43,5 +57,12 @@ void GameObject::update()
 
 void GameObject::render(sf::RenderWindow* window)
 {
-	window->draw(*this->sprite);
+	this->renderer.render(window);
+}
+
+template<class T>
+void GameObject::addComponenet()
+{
+	Component* component = new T(this);
+	this->components.push_back(component);
 }

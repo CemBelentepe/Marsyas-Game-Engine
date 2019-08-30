@@ -26,19 +26,16 @@ int main()
 {
 	mge::Game::createWindow("SFML Game Test", 800, 600, false);
 
-	sf::Texture texture;
-	texture.loadFromFile("Resources/player.png");
+	mge::Scene scene0("Scene 0");
+	mge::Game::addScene(&scene0);
+	
+	mge::Resources::loadTexture("player", "Resources/player.png");
 
-	mge::GameObject gameObject(&texture, sf::Vector2f(0, 0));
+	mge::GameObject gameObject("Player", "player", sf::Vector2f(0, 0));
 	gameObject.addComponenet<PlayerMoveComponent>();
-	std::vector<mge::GameObject*> gameObjects;
-	gameObjects.push_back(&gameObject);
+	
+	scene0.addGameObject(&gameObject);
 
-	mge::Scene scene0(gameObjects);
-	std::vector<mge::Scene*> scenes;
-	scenes.push_back(&scene0);
-
-	mge::Game::loadScenes(scenes);
 	mge::Game::startEngine();
 	return 0;
 }

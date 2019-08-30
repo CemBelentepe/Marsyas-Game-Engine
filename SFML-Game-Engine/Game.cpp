@@ -46,7 +46,7 @@ void Game::setScene(int sceneID)
 	}
 	else
 	{
-		std::cout << "Scene Loading Error: Scene with id did not found: " << sceneID << std::endl;
+		Debug::logError("Scene with id did not found: " + sceneID);
 	}
 }
 
@@ -65,7 +65,7 @@ void Game::setScene(Scene* scene)
 	}
 	if (!loaded)
 	{
-		std::cout << "Scene Loading Error: Scene did not found: " << scene << std::endl;
+		Debug::logError("Scene did not found."); // Add the id of the name of the scene later. TODO
 	}
 }
 
