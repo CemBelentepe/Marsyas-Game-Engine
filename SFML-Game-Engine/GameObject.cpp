@@ -1,4 +1,6 @@
 #include "GameObject.h"
+#include "Component.h"
+#include "Scene.h"
 
 using namespace mge;
 
@@ -18,51 +20,48 @@ void GameObject::updateComponents()
 	}
 }
 
-GameObject::GameObject(sf::String name, sf::Vector2f pos)
+GameObject::GameObject(sf::String name, sf::Vector2f pos, Scene* scene)
 {
 	this->initVariables();
 	this->name = name;
 	this->renderer.setTexture("default");
 	this->renderer.setPosition(pos);
+	this->scene = scene;
 }
 
-mge::GameObject::GameObject(sf::String name, sf::String textureName, sf::Vector2f pos)
+mge::GameObject::GameObject(sf::String name, sf::String textureName, sf::Vector2f pos, Scene* scene)
 {
 	this->initVariables();
 	this->name = name;
 	this->renderer.setTexture(textureName);
 	this->pos = pos;
+	this->scene = scene;
 }
 
-mge::GameObject::GameObject(sf::String name, sf::String textureName, sf::IntRect textureRect, sf::Vector2f pos)
+mge::GameObject::GameObject(sf::String name, sf::String textureName, sf::IntRect textureRect, sf::Vector2f pos, Scene* scene)
 {
 	this->initVariables();
 	this->name = name;
 	this->renderer.setTexture(textureName, textureRect);
 	this->pos = pos;
+	this->scene = scene;
 }
 
-void mge::GameObject::init()
+void mge::GameObject::init(Scene* scene)
 {
-	this->render.
+	this->scene = scene;
+	this->renderer.setActive(true);
 }
 
 void GameObject::update()
 {
-	this->sprite->setPosition(this->pos);
-	this->sprite->setScale(this->scale);
-	this->sprite->setRotation(this->rotation);
+	this->renderer.setPosition(this->pos);
+	this->renderer.setScale(this->scale);
+	this->renderer.setRotation(this->rotation);
 	this->updateComponents();
 }
 
 void GameObject::render(sf::RenderWindow* window)
 {
 	this->renderer.render(window);
-}
-
-template<class T>
-void GameObject::addComponenet()
-{
-	Component* component = new T(this);
-	this->components.push_back(component);
 }

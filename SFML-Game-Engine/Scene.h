@@ -1,8 +1,11 @@
 #pragma once
-#include "GameObject.h"
+#include "SFML/Graphics.hpp"
 
 namespace mge
 {
+	class GameObject;
+	class Collider;
+
 	class Scene
 	{
 	private:
@@ -10,15 +13,16 @@ namespace mge
 
 		sf::RenderWindow* window;
 		std::vector<GameObject*> gameObjects;
+		std::vector<Collider*> colliders;
 
 		void updateGameObjects();
 		void updateGUI();
+		void updateCollisions();
 
 		void renderGameObjects();
 		void renderGUI();
 	public:
 		Scene(sf::String name);
-		//Scene(std::vector<GameObject*> gameObjects);
 		// ~Scene();
 
 		void load();
@@ -28,6 +32,8 @@ namespace mge
 
 		void addGameObject(GameObject* gameObject);
 		void setGameObjects(std::vector<GameObject*> gameObjects);
+
+		void addCollider(Collider* collider);
 
 		void setWindow(sf::RenderWindow* window);
 	};

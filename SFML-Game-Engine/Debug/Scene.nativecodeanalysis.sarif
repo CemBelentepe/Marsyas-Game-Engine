@@ -12,402 +12,408 @@
       },
       "invocations": [
         {
-          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\bin\\HostX86\\x86\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x004020A0 -il C:\\Users\\cemal\\AppData\\Local\\Temp\\_CL_2bb111adast -typedil -f Scene.cpp -Ze -D_MSC_EXTENSIONS -Zp8 -ZB64 -D_INTEGRAL_MAX_BITS=64 -Gs -pc \\:/ -D_MSC_VER=1922 -D_MSC_FULL_VER=192227905 -D_MSC_BUILD=0 -D_WIN32 -D_M_IX86=600 -D_M_IX86_FP=2 -GR -D_CPPRTTI -I C:\\Users\\cemal\\Source\\Repos\\SFML-Game-Engine2\\sfml x86\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -DCODE_ANALYSIS -D_MBCS -EHs -D_CPPUNWIND -EHc -D__MSVC_RUNTIME_CHECKS -RTCs -RTCu -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -FoDebug\\Scene.obj -FdDebug\\vc142.pdb -Gd -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:projectdirectory C:\\Users\\cemal\\source\\repos\\SFML-Game-Engine2\\SFML-Game-Engine -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.7.2\\Include\\um"
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\bin\\HostX86\\x86\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x010F20A0 -il C:\\Users\\TheCCB\\AppData\\Local\\Temp\\_CL_73577d49ast -typedil -f Scene.cpp -Ze -D_MSC_EXTENSIONS -Zp8 -ZB64 -D_INTEGRAL_MAX_BITS=64 -Gs -pc \\:/ -D_MSC_VER=1922 -D_MSC_FULL_VER=192227905 -D_MSC_BUILD=0 -D_WIN32 -D_M_IX86=600 -D_M_IX86_FP=2 -GR -D_CPPRTTI -I P:\\Repos\\GitHub\\SFML-Game-Engine\\theCCB\\SFML-Game-Engine\\sfml x86\\include -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -DCODE_ANALYSIS -D_MBCS -EHs -D_CPPUNWIND -EHc -D__MSVC_RUNTIME_CHECKS -RTCs -RTCu -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -permissive- -Zc:wchar_t -Zc:forScope -FoDebug\\Scene.obj -FdDebug\\vc142.pdb -Gd -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:projectdirectory P:\\Repos\\GitHub\\SFML-Game-Engine\\theCCB\\SFML-Game-Engine\\SFML-Game-Engine -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.22.27905\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.18362.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.7.2\\Include\\um"
         }
       ],
       "files": {
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml-game-engine/scene.cpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml-game-engine/spriterenderer.cpp": {
           "roles": [
             "analysisTarget",
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml-game-engine/scene.h": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/vertex.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/clock.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/image.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/config.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml-game-engine/spriterenderer.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/windowhandle.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/sensor.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/texture.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml-game-engine/gameobject.h": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/context.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/threadlocalptr.inl": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/export.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/time.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/vector2.inl": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/window.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/clock.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/threadlocalptr.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/config.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/err.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/keyboard.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/clipboard.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/export.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/utf.inl": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/event.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/fileinputstream.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/time.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/inputstream.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/circleshape.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/glresource.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/err.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/noncopyable.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/fileinputstream.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/font.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/inputstream.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/joystick.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/noncopyable.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/lock.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/lock.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/videomode.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/rect.inl": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/threadlocal.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/threadlocal.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/memoryinputstream.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/memoryinputstream.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/primitivetype.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/primitivetype.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/mutex.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/mutex.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/sleep.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/sleep.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/string.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/color.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/utf.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/string.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/string.inl": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/utf.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/context.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/utf.inl": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/thread.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/convexshape.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/circleshape.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/string.inl": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/export.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/thread.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/thread.inl": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/window.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/threadlocalptr.inl": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/export.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/vector2.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/thread.inl": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/mouse.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/threadlocalptr.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/vector2.inl": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/vector2.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/vector3.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/vector3.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/system/vector3.inl": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/system/vector3.inl": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/rect.inl": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/clipboard.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/contextsettings.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/rect.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/cursor.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/glresource.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/event.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/contextsettings.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/transform.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/cursor.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/keyboard.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/font.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/shape.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/joystick.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/sensor.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/mouse.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/windowhandle.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/touch.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/touch.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/videomode.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/window/windowstyle.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/window/windowstyle.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/blendmode.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/drawable.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/export.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/blendmode.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/glyph.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/transform.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/drawable.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/export.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/renderstates.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/shape.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/rect.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/transformable.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/transformable.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/renderstates.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/vertexarray.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/renderwindow.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/color.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/vertexarray.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/convexshape.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/vertex.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/image.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/glyph.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/rectangleshape.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/texture.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/rendertarget.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/rectangleshape.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/view.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/rendertarget.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/rendertexture.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/view.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/renderwindow.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/rendertexture.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/shader.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/shader.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/glsl.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/glsl.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/glsl.inl": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/glsl.inl": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/sprite.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/sprite.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/text.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/text.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml x86/include/sfml/graphics/vertexbuffer.hpp": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml x86/include/sfml/graphics/vertexbuffer.hpp": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml-game-engine/resources.h": {
           "roles": [
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml-game-engine/component.h": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml-game-engine/scene.cpp": {
           "roles": [
+            "analysisTarget",
             "resultFile"
           ]
         },
-        "file:///c:/users/cemal/source/repos/sfml-game-engine2/sfml-game-engine/resources.h": {
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml-game-engine/scene.h": {
+          "roles": [
+            "resultFile"
+          ]
+        },
+        "file:///p:/repos/github/sfml-game-engine/theccb/sfml-game-engine/sfml-game-engine/gameobject.h": {
           "roles": [
             "resultFile"
           ]
