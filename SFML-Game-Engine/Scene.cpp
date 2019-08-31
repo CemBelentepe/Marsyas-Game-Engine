@@ -85,6 +85,10 @@ void Scene::addGameObject(GameObject* gameObject)
 void mge::Scene::setGameObjects(std::vector<GameObject*> gameObjects)
 {
 	this->gameObjects = gameObjects;
+	for (auto gameObject : gameObjects)
+	{
+		gameObject->scene = this;
+	}
 }
 
 void mge::Scene::addCollider(Collider* collider)

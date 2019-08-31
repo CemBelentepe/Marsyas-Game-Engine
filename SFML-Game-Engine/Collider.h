@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "SFML/Graphics.hpp"
 #include "Component.h"
 
@@ -10,14 +11,18 @@ namespace mge
 	{
 	public:
 		GameObject* gameObject;
-		GameObject* lastCollider;
+		std::vector<GameObject*> lastColliders;
+		std::vector<GameObject*> frameColliders;
+
 		Collider(GameObject* gameObject) :Component(gameObject)
 		{
 			this->gameObject = gameObject;
-			this->lastCollider = nullptr;
+			this->lastColliders = std::vector<GameObject*>();
+			this->frameColliders = std::vector<GameObject*>();
 		}
 
 		void onColliderStay(GameObject* collider) override;
+		void update() override;
 		virtual bool intersects(Collider* collider);
 	};
 

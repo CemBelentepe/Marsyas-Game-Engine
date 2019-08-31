@@ -20,31 +20,28 @@ void GameObject::updateComponents()
 	}
 }
 
-GameObject::GameObject(sf::String name, sf::Vector2f pos, Scene* scene)
+GameObject::GameObject(sf::String name, sf::Vector2f pos)
 {
 	this->initVariables();
 	this->name = name;
 	this->renderer.setTexture("default");
 	this->renderer.setPosition(pos);
-	this->scene = scene;
 }
 
-mge::GameObject::GameObject(sf::String name, sf::String textureName, sf::Vector2f pos, Scene* scene)
+mge::GameObject::GameObject(sf::String name, sf::String textureName, sf::Vector2f pos)
 {
 	this->initVariables();
 	this->name = name;
 	this->renderer.setTexture(textureName);
 	this->pos = pos;
-	this->scene = scene;
 }
 
-mge::GameObject::GameObject(sf::String name, sf::String textureName, sf::IntRect textureRect, sf::Vector2f pos, Scene* scene)
+mge::GameObject::GameObject(sf::String name, sf::String textureName, sf::IntRect textureRect, sf::Vector2f pos)
 {
 	this->initVariables();
 	this->name = name;
 	this->renderer.setTexture(textureName, textureRect);
 	this->pos = pos;
-	this->scene = scene;
 }
 
 void mge::GameObject::init(Scene* scene)

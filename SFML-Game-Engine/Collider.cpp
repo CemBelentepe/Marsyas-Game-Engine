@@ -1,21 +1,55 @@
 #include "Collider.h"
 #include "GameObject.h"
+#include "Debug.h"
+#include <algorithm>
 
 void mge::Collider::onColliderStay(GameObject* collider)
 {
-	for (auto comp : this->gameObject->components)
+	if (collider != nullptr)
 	{
-		if (!dynamic_cast<Collider*>(comp))
+		this->frameColliders.push_back(collider);
+	}
+}
+
+void mge::Collider::update()
+{
+	for (GameObject* collider : frameColliders)
+	{
+		for (auto comp : this->gameObject->components)
 		{
-			comp->onColliderStay(collider);
-			if (collider != this->lastCollider)
+			if (!dynamic_cast<Collider*>(comp))
 			{
-				if (collider != nullptr) comp->onColliderEnter(collider);
-				else comp->onColliderLeave(collider);
+				comp->onColliderStay(collider);
+
+				if (std::find(lastColliders.begin(), lastColliders.end(), collider) == lastColliders.end())
+				{
+					comp->onColliderEnter(collider);
+				}
 			}
-			this->lastCollider = collider;
 		}
 	}
+	for (GameObject* collider : lastColliders)
+	{
+		for (auto comp : this->gameObject->components)
+		{
+			if (!dynamic_cast<Collider*>(comp))
+			{
+				comp->onColliderStay(collider);
+
+				if (std::find(frameColliders.begin(), frameColliders.end(), collider) == frameColliders.end())
+				{
+					comp->onColliderLeave(collider);
+				}
+			}
+		}
+	}
+
+	this->lastColliders.clear();
+	for (GameObject* x : frameColliders)
+	{
+		this->lastColliders.push_back(x);
+	}
+	this->frameColliders.clear();
 }
 
 bool mge::Collider::intersects(Collider* collider)
@@ -26,6 +60,7 @@ bool mge::Collider::intersects(Collider* collider)
 
 void mge::BoxCollider::update()
 {
+	Collider::update();
 	boundingBox = this->gameObject->renderer.getGlobalBounds();
 }
 

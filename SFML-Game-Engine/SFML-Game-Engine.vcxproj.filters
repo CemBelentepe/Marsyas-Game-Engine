@@ -63,6 +63,9 @@
     <ClCompile Include="Scene.cpp">
       <Filter>GameEngine\Main</Filter>
     </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>GameEngine\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>GameEngine\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>GameEngine\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
