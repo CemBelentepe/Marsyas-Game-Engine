@@ -8,7 +8,12 @@ namespace mge
 	private:
 		sf::String textureName;
 		sf::IntRect textureRect;
-		bool isActive;
+
+		sf::Vector2f pos;
+		sf::Vector2f scale;
+		float rotation;
+
+		bool active;
 
 	public:
 		sf::Sprite* sprite;
@@ -18,12 +23,17 @@ namespace mge
 		void render(sf::RenderWindow* window);
 
 		void setActive(bool isActive);
+		bool isActive() { return this->active; }
 
 		void setTexture(sf::String textureName);
 		void setTexture(sf::String textureName, sf::IntRect textureRect);
 		void setTexureRect(sf::IntRect textureRect);
 
-		void setPosition(sf::Vector2f pos) { this->sprite->setPosition(pos); }
+		void setPosition(sf::Vector2f pos) { this->pos = pos; }
+		void setScale(sf::Vector2f scale) { this->scale = scale; }
+		void setRotation(float rotation) { this->rotation = rotation; }
+
+		sf::FloatRect getGlobalBounds();
 
 		void resetSprite();
 	};

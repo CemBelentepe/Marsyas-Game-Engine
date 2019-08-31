@@ -2,8 +2,6 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "Scene.h"
-#include "Input.h"
-#include "Debug.h"
 
 namespace mge
 {

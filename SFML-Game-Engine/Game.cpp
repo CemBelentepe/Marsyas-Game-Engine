@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "Debug.h"
+#include "Input.h"
 
 using namespace mge;
 
@@ -43,6 +45,7 @@ void Game::setScene(int sceneID)
 	if (sceneID < static_cast<int>(scenes.size()))
 	{
 		activeScene = scenes.at(sceneID);
+		activeScene->load();
 	}
 	else
 	{
@@ -59,6 +62,7 @@ void Game::setScene(Scene* scene)
 		{
 			activeSceneID = i;
 			activeScene = scenes.at(i);
+			activeScene->load();
 			loaded = true;
 			break;
 		}

@@ -1,21 +1,29 @@
 #include "SpriteRenderer.h"
 #include "Resources.h"
+#include "Debug.h"
 
 mge::SpriteRenderer::SpriteRenderer()
 {
 	this->textureName = "default";
 	this->textureRect = sf::IntRect();
-	this->isActive = false;
+	this->setActive(false);
 }
 
 void mge::SpriteRenderer::render(sf::RenderWindow* window)
 {
-	window->draw(*this->sprite);
+	if (active)
+	{
+		this->sprite->setPosition(this->pos);
+		this->sprite->setScale(this->scale);
+		this->sprite->setRotation(this->rotation);
+
+		window->draw(*this->sprite);
+	}
 }
 
 void mge::SpriteRenderer::setActive(bool isActive)
 {
-	this->isActive = isActive;
+	this->active = isActive;
 
 	if (isActive) this->resetSprite();
 	else delete sprite;
@@ -39,10 +47,28 @@ void mge::SpriteRenderer::setTexureRect(sf::IntRect textureRect)
 	this->textureRect = textureRect;
 }
 
+
+sf::FloatRect mge::SpriteRenderer::getGlobalBounds()
+{
+	if (this->active)
+		return this->sprite->getGlobalBounds();
+	else
+	{
+		Debug::logWarning("Renderer is inactive.");
+		return sf::FloatRect();
+	}
+}
+
 void mge::SpriteRenderer::resetSprite()
 {
-	if (isActive)
+	if (active)
+	{
 		this->sprite = Resources::createSpriteFromTexture(this->textureName, this->textureRect);
+
+		this->sprite->setPosition(this->pos);
+		this->sprite->setScale(this->scale);
+		this->sprite->setRotation(this->rotation);
+	}
 	else
 		delete this->sprite;
 }
