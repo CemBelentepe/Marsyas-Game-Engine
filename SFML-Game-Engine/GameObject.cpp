@@ -44,6 +44,15 @@ mge::GameObject::GameObject(sf::String name, sf::String textureName, sf::IntRect
 	this->pos = pos;
 }
 
+mge::GameObject::~GameObject()
+{
+	for (auto comp : components)
+	{
+		delete comp;
+	}
+
+}
+
 void mge::GameObject::init(Scene* scene)
 {
 	this->scene = scene;

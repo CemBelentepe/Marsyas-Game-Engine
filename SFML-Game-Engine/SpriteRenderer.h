@@ -19,6 +19,7 @@ namespace mge
 		sf::Sprite* sprite;
 
 		SpriteRenderer();
+		~SpriteRenderer();
 
 		void render(sf::RenderWindow* window);
 

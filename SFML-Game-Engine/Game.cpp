@@ -131,6 +131,7 @@ void Game::updateEvents()
 void Game::update()
 {
 	activeScene->update();
+	activeScene->lateUpdate();
 }
 
 void Game::render()

@@ -27,6 +27,7 @@ namespace mge
 		GameObject(sf::String name, sf::Vector2f pos = sf::Vector2f(0, 0));
 		GameObject(sf::String name, sf::String textureName, sf::Vector2f pos = sf::Vector2f(0, 0));
 		GameObject(sf::String name, sf::String textureName, sf::IntRect textureRect, sf::Vector2f pos = sf::Vector2f(0, 0));
+		virtual ~GameObject();
 		
 		template <class T>
 		void addComponenet()

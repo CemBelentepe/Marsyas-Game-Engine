@@ -9,6 +9,11 @@ mge::SpriteRenderer::SpriteRenderer()
 	this->setActive(false);
 }
 
+mge::SpriteRenderer::~SpriteRenderer()
+{
+	delete sprite;
+}
+
 void mge::SpriteRenderer::render(sf::RenderWindow* window)
 {
 	if (active)
