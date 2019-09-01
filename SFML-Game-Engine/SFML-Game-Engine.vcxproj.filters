@@ -13,10 +13,90 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="GameEngine">
+      <UniqueIdentifier>{5edf4ba2-0764-4f3c-a4d7-e2c3ff5786ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Components">
+      <UniqueIdentifier>{fe9e425e-2158-41bd-8496-f43ec9dc4f35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Utils">
+      <UniqueIdentifier>{ddc9261a-1195-4e7b-8097-8b50a21a7a78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Renderers">
+      <UniqueIdentifier>{9fb638af-bb6f-4c7c-bad7-bfb42433a87d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Resources">
+      <UniqueIdentifier>{272350c4-8fd3-4550-a911-c17ae938ae48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\Main">
+      <UniqueIdentifier>{4c57d6b2-80ff-4b62-b840-c0c555904275}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>GameEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>GameEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>GameEngine\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>GameEngine\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>GameEngine\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources.cpp">
+      <Filter>GameEngine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameEngine\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>GameEngine\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>GameEngine\Utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>GameEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>GameEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>GameEngine\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>GameEngine\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>GameEngine\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources.h">
+      <Filter>GameEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameEngine\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>GameEngine\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>GameEngine\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
