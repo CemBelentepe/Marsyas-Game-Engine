@@ -12,6 +12,10 @@ namespace mge
 		static sf::RenderWindow window;
 		static sf::String title;
 
+		static bool isShowFPS;
+		static float lastFPSs[10];
+		static int fpsInc;
+
 		static sf::Clock clock;
 
 		static std::vector<Scene*> scenes;
@@ -29,11 +33,12 @@ namespace mge
 		static float deltaTime;
 
 		Game() {}
-		//virtual ~Game();
-
+		
 		static void loadScenes(std::vector<Scene*> scenes);
 		static void createWindow(const char* title, int width, int height, bool fullscreen = false);
 		static void startEngine(int startSceneID = 0);
+		static void showFPS(bool show = true);
+		static void setLimitFPS(int fps);
 
 		static void exitGame();
 

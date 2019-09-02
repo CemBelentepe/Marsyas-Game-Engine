@@ -15,23 +15,22 @@ class EnemyController;
 
 int main()
 {
-	Game::createWindow("Game Engine Test", 1200, 900, false);
-	scene0 = new Scene("Scene 0");
-	Game::addScene(scene0);
+	Game::createWindow("Game Engine Test", 1200, 900);
 
 	Resources::loadTexture("player", "Resources/player.png");
 	Resources::loadTexture("enemy", "Resources/enemy.png");
 	Resources::loadTexture("laserPlayer", "Resources/laser1.png");
 	Resources::loadTexture("laserEnemy", "Resources/laser2.png");
 
+	scene0 = new Scene("Scene 0");
+	Game::addScene(scene0);
+
 	GameObject player("Player", "player", sf::Vector2f(550, 800));
 	scene0->addGameObject(&player);
-
 
 	player.addComponenet<BoxCollider>();
 	player.addComponenet<PlayerController>();
 	player.addComponenet<GameController>();
-
 
 	Game::startEngine();
 	return 0;
@@ -53,7 +52,7 @@ public:
 
 		if (Input::getKeyDown(sf::Keyboard::Key::Left))
 			gameObject->pos.x -= speed;
-		else if (Input::getKeyDown(sf::Keyboard::Key::Right))
+		if (Input::getKeyDown(sf::Keyboard::Key::Right))
 			gameObject->pos.x += speed;
 
 		gameObject->pos.x = Math::clamp(gameObject->pos.x, 0, 1100);
@@ -70,7 +69,7 @@ public:
 
 		GameObject* laser = new GameObject("PlayerLaser", "laserPlayer", lPos);
 		scene0->addGameObject(laser);
-		laser->renderer.resetSprite();		
+		laser->renderer.resetSprite();
 		laser->renderer.setActive(true);
 		laser->addComponenet<BoxCollider>();
 		laser->addComponenet<LaserController>();
@@ -93,6 +92,8 @@ public:
 
 	float cooldown = 1.f;
 	float leftTime = 0;
+	float totalFPS = 0;
+	int fpsCount = 0;
 
 	void update() override
 	{
@@ -108,8 +109,16 @@ public:
 			leftTime = cooldown;
 		}
 
+		totalFPS += 1 / Game::deltaTime;
+		fpsCount++;
+
 		if (Input::getKeyDown(sf::Keyboard::Escape))
+		{
+			totalFPS /= fpsCount;
+			std::string s = std::to_string(totalFPS);
+			Debug::log("FPS: "+ s);
 			Game::exitGame();
+		}
 	}
 };
 
@@ -123,7 +132,7 @@ public:
 		if (gameObject->name == "PlayerLaser") speed *= -1;
 		gameObject->pos.y += speed * Game::deltaTime;
 
-		if (gameObject->pos.y < 0 && gameObject->pos.y > 1000) scene0->destroyGameObject(gameObject);
+		if (gameObject->pos.y < 0 || gameObject->pos.y > 1000) scene0->destroyGameObject(gameObject);
 	}
 
 };

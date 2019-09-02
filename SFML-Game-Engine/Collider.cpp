@@ -3,12 +3,10 @@
 #include "Debug.h"
 #include <algorithm>
 
-void mge::Collider::onColliderStay(GameObject* collider)
+void mge::Collider::colliderUpdate(GameObject* collider)
 {
 	if (collider != nullptr)
-	{
 		this->frameColliders.push_back(collider);
-	}
 }
 
 void mge::Collider::update()
@@ -17,30 +15,27 @@ void mge::Collider::update()
 	{
 		for (auto comp : this->gameObject->components)
 		{
-			if (!dynamic_cast<Collider*>(comp))
-			{
-				comp->onColliderStay(collider);
+			comp->onColliderStay(collider);
 
-				if (std::find(lastColliders.begin(), lastColliders.end(), collider) == lastColliders.end())
-				{
-					comp->onColliderEnter(collider);
-				}
+			if (std::find(lastColliders.begin(), lastColliders.end(), collider) == lastColliders.end())
+			{
+				comp->onColliderEnter(collider);
 			}
+
 		}
 	}
+
 	for (GameObject* collider : lastColliders)
 	{
 		for (auto comp : this->gameObject->components)
 		{
-			if (!dynamic_cast<Collider*>(comp))
-			{
-				comp->onColliderStay(collider);
+			comp->onColliderStay(collider);
 
-				if (std::find(frameColliders.begin(), frameColliders.end(), collider) == frameColliders.end())
-				{
-					comp->onColliderLeave(collider);
-				}
+			if (std::find(frameColliders.begin(), frameColliders.end(), collider) == frameColliders.end())
+			{
+				comp->onColliderLeave(collider);
 			}
+
 		}
 	}
 

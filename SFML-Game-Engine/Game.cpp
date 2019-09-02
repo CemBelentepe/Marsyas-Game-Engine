@@ -6,6 +6,9 @@ using namespace mge;
 
 sf::RenderWindow Game::window;
 sf::String Game::title = "";
+bool Game::isShowFPS = false;
+float Game::lastFPSs[10] = { 0,0,0,0,0,0,0,0,0 };
+int Game::fpsInc = 0;
 
 sf::Clock Game::clock = sf::Clock::Clock();
 sf::Time Game::tDeltaTime = sf::Time::Zero;
@@ -85,10 +88,38 @@ void Game::startEngine(int startSceneID)
 		tDeltaTime = clock.getElapsedTime();
 		clock.restart();
 		deltaTime = tDeltaTime.asSeconds();
+
 		updateEvents();
 		update();
 		render();
+
+		if (isShowFPS)
+		{
+			float currentFps = 1.0 / deltaTime;
+			lastFPSs[fpsInc] = currentFps;
+			fpsInc++;
+			if (fpsInc == 10)
+				fpsInc = 0;
+
+			float fps = 0;
+			for (float f : lastFPSs)
+				fps += f;
+			fps /= 10;
+			int fpsi = (int)(100.0 * fps);
+			fps = fpsi / 100.0;
+			window.setTitle(title + " - " + std::to_string(fps) + "fps");
+		}
 	}
+}
+
+void mge::Game::showFPS(bool show)
+{
+	Game::isShowFPS = show;
+}
+
+void mge::Game::setLimitFPS(int fps)
+{
+	Game::window.setFramerateLimit(fps);
 }
 
 void mge::Game::exitGame()

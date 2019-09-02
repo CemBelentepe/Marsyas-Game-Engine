@@ -21,7 +21,7 @@ namespace mge
 			this->frameColliders = std::vector<GameObject*>();
 		}
 
-		void onColliderStay(GameObject* collider) override;
+		void colliderUpdate(GameObject* collider);
 		void update() override;
 		virtual bool intersects(Collider* collider);
 	};

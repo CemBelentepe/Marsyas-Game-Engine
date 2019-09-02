@@ -27,9 +27,9 @@ void mge::Scene::updateCollisions()
 				if (collision->gameObject->renderer.isActive() && collider != collision)
 				{
 					if (collider->intersects(collision))
-						collider->onColliderStay(collision->gameObject);
+						collider->colliderUpdate(collision->gameObject);
 					else
-						collider->onColliderStay(nullptr);
+						collider->colliderUpdate(nullptr);
 				}
 			}
 	}
