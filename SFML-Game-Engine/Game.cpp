@@ -91,6 +91,11 @@ void Game::startEngine(int startSceneID)
 	}
 }
 
+void mge::Game::exitGame()
+{
+	Game::window.close();
+}
+
 void Game::initScenes(std::vector<Scene*> scenes)
 {
 	Game::scenes = scenes;

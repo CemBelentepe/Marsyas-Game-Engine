@@ -91,7 +91,7 @@ class GameController :public Component
 public:
 	GameController(GameObject* gameObject) : Component(gameObject) {}
 
-	float cooldown = 3.f;
+	float cooldown = 1.f;
 	float leftTime = 0;
 
 	void update() override
@@ -107,6 +107,9 @@ public:
 			enemy->addComponenet<EnemyController>();
 			leftTime = cooldown;
 		}
+
+		if (Input::getKeyDown(sf::Keyboard::Escape))
+			Game::exitGame();
 	}
 };
 
@@ -140,7 +143,9 @@ public:
 			gameObject->pos.y += 200 * Game::deltaTime;
 		}
 
-		if (leftTime < 0)
+		if (leftTime > 0)
+			leftTime -= Game::deltaTime;
+		else
 			shoot();
 
 	}

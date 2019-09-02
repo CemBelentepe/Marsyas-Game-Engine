@@ -35,6 +35,8 @@ namespace mge
 		static void createWindow(const char* title, int width, int height, bool fullscreen = false);
 		static void startEngine(int startSceneID = 0);
 
+		static void exitGame();
+
 		static void addScene(Scene* scene);
 		static void setScene(int sceneID);
 		static void setScene(Scene* scene);
