@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "GameObject.h"
+#include "Collider.h"
 
 using namespace mge;
 
@@ -8,7 +9,9 @@ void Scene::updateGameObjects()
 	// TODO: optimize
 	for (size_t i = 0; i < gameObjects.size(); i++)
 	{
-		gameObjects.at(i)->update();
+		GameObject* gameObject = gameObjects.at(i);
+		if (gameObject->isActive())
+			gameObject->update();
 	}
 }
 
@@ -21,7 +24,7 @@ void mge::Scene::updateCollisions()
 {
 	for (auto collider : this->colliders)
 	{
-		if (collider->gameObject->renderer.isActive())
+		if (collider->gameObject->isActive() && collider->isActive())
 			for (auto collision : this->colliders)
 			{
 				if (collision->gameObject->renderer.isActive() && collider != collision)
@@ -38,9 +41,10 @@ void mge::Scene::updateCollisions()
 void Scene::renderGameObjects()
 {
 	// TODO: optimize
-	for (size_t i = 0; i < gameObjects.size(); i++)
+	for (auto gameObject : gameObjects)
 	{
-		gameObjects.at(i)->render(window);
+		if (gameObject->isActive())
+			gameObject->render(window);
 	}
 }
 
@@ -98,6 +102,7 @@ void Scene::render()
 void Scene::addGameObject(GameObject* gameObject)
 {
 	gameObject->scene = this;
+	gameObject->renderer.setActive(true);
 	this->gameObjects.push_back(gameObject);
 }
 

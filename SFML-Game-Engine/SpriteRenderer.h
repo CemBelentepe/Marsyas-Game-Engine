@@ -13,7 +13,7 @@ namespace mge
 		sf::Vector2f scale;
 		float rotation;
 
-		bool active;
+		bool enabled = true;
 
 	public:
 		sf::Sprite* sprite;
@@ -24,7 +24,7 @@ namespace mge
 		void render(sf::RenderWindow* window);
 
 		void setActive(bool isActive);
-		bool isActive() { return this->active; }
+		bool isActive() { return this->enabled; }
 
 		void setTexture(sf::String textureName);
 		void setTexture(sf::String textureName, sf::IntRect textureRect);

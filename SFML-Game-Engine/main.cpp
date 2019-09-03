@@ -3,6 +3,7 @@
 #include "Resources.h"
 #include "Input.h"
 #include "Math.h"
+#include "Collider.h"
 
 using namespace mge;
 
@@ -35,6 +36,26 @@ int main()
 	Game::startEngine();
 	return 0;
 }
+
+
+class LaserController :public Component
+{
+public:
+	LaserController(GameObject* gameObject) : Component(gameObject) {}
+
+	float speed = 500;
+	void start() override
+	{
+		if (gameObject->name == "PlayerLaser") speed *= -1;
+	}
+	void update() override
+	{
+		gameObject->pos.y += speed * Game::deltaTime;
+
+		if (gameObject->pos.y < 0 || gameObject->pos.y > 1000) scene0->destroyGameObject(gameObject);
+	}
+
+};
 
 class PlayerController :public Component
 {
@@ -70,7 +91,6 @@ public:
 		GameObject* laser = new GameObject("PlayerLaser", "laserPlayer", lPos);
 		scene0->addGameObject(laser);
 		laser->renderer.resetSprite();
-		laser->renderer.setActive(true);
 		laser->addComponenet<BoxCollider>();
 		laser->addComponenet<LaserController>();
 	}
@@ -81,58 +101,6 @@ public:
 		{
 			Debug::log("Player is dead");
 		}
-	}
-
-};
-
-class GameController :public Component
-{
-public:
-	GameController(GameObject* gameObject) : Component(gameObject) {}
-
-	float cooldown = 1.f;
-	float leftTime = 0;
-	float totalFPS = 0;
-	int fpsCount = 0;
-
-	void update() override
-	{
-		if (leftTime > 0)
-			leftTime -= Game::deltaTime;
-		else
-		{
-			GameObject* enemy = new GameObject("Enemy", "enemy", sf::Vector2f(rand() * 1100 / RAND_MAX, 0));
-			scene0->addGameObject(enemy);
-			enemy->renderer.setActive(true);
-			enemy->addComponenet<BoxCollider>();
-			enemy->addComponenet<EnemyController>();
-			leftTime = cooldown;
-		}
-
-		totalFPS += 1 / Game::deltaTime;
-		fpsCount++;
-
-		if (Input::getKeyDown(sf::Keyboard::Escape))
-		{
-			totalFPS /= fpsCount;
-			std::string s = std::to_string(totalFPS);
-			Debug::log("FPS: "+ s);
-			Game::exitGame();
-		}
-	}
-};
-
-class LaserController :public Component
-{
-public:
-	LaserController(GameObject* gameObject) : Component(gameObject) {}
-	void update()
-	{
-		float speed = 500;
-		if (gameObject->name == "PlayerLaser") speed *= -1;
-		gameObject->pos.y += speed * Game::deltaTime;
-
-		if (gameObject->pos.y < 0 || gameObject->pos.y > 1000) scene0->destroyGameObject(gameObject);
 	}
 
 };
@@ -166,7 +134,6 @@ public:
 
 		GameObject* laser = new GameObject("EnemyLaser", "laserEnemy", lPos);
 		gameObject->scene->addGameObject(laser);
-		laser->renderer.setActive(true);
 		laser->addComponenet<BoxCollider>();
 		laser->addComponenet<LaserController>();
 	}
@@ -176,6 +143,48 @@ public:
 		{
 			scene0->destroyGameObject(this->gameObject);
 			scene0->destroyGameObject(collider);
+		}
+	}
+};
+
+class GameController :public Component
+{
+public:
+	GameController(GameObject* gameObject) : Component(gameObject) {}
+
+	float cooldown = 1.f;
+	float leftTime = 0;
+	float totalFPS = 0;
+	int fpsCount = 0;
+
+	void update() override
+	{
+		if (leftTime > 0)
+			leftTime -= Game::deltaTime;
+		else
+		{
+			GameObject* enemy = new GameObject("Enemy", "enemy", sf::Vector2f(rand() * 1100 / RAND_MAX, 0));
+			scene0->addGameObject(enemy);
+			enemy->addComponenet<BoxCollider>();
+			enemy->addComponenet<EnemyController>();
+			leftTime = cooldown;
+		}
+
+		totalFPS += 1 / Game::deltaTime;
+		fpsCount++;
+
+		if (Input::getKeyDown(sf::Keyboard::A))
+		{
+			PlayerController* pc = this->gameObject->getComponent<PlayerController>();
+			pc->setActive(!pc->isActive());
+		}
+
+		if (Input::getKeyDown(sf::Keyboard::Escape))
+		{
+			totalFPS /= fpsCount;
+			std::string s = std::to_string(totalFPS);
+			Debug::log("FPS: " + s);
+			Game::exitGame();
 		}
 	}
 };

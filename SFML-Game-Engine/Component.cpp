@@ -11,6 +11,10 @@ Component::~Component()
 {
 }
 
+void mge::Component::start()
+{
+}
+
 void Component::update()
 {
 }

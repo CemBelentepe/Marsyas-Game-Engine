@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "Component.h"
 #include "Scene.h"
+#include "Collider.h"
 
 using namespace mge;
 
@@ -14,9 +15,26 @@ void GameObject::initVariables()
 
 void GameObject::updateComponents()
 {
-	for (size_t i = 0; i < components.size(); i++)
+	// Adds the new components to the all components vector then
+	// Starts the components even if they are enabled or not!
+	for (auto c : newComponents)
 	{
-		components.at(i)->update();
+		components.push_back(c);
+		c->start();
+
+		Collider* collider = dynamic_cast<Collider*>(c);
+		if (collider)
+		{
+			this->scene->addCollider(collider);
+		}
+	}
+	newComponents.clear();
+
+	// Updates all of the components (newly added too), if they are enabled
+	for (auto c : components)
+	{
+		if (c->isActive())
+			c->update();
 	}
 }
 
@@ -61,13 +79,18 @@ void mge::GameObject::init(Scene* scene)
 
 void GameObject::update()
 {
+	this->updateComponents();
 	this->renderer.setPosition(this->pos);
 	this->renderer.setScale(this->scale);
 	this->renderer.setRotation(this->rotation);
-	this->updateComponents();
 }
 
 void GameObject::render(sf::RenderWindow* window)
 {
 	this->renderer.render(window);
+}
+
+void mge::GameObject::setActive(bool active)
+{
+	this->enabled = active;
 }
