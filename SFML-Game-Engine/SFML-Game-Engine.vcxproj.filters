@@ -98,7 +98,7 @@
     <ClInclude Include="Mathf.h">
       <Filter>GameEngine\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="MarsiasGameEngine.h">
+    <ClInclude Include="MarsyasGameEngine.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
   </ItemGroup>

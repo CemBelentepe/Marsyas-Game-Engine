@@ -55,17 +55,17 @@ namespace mge
 		return false;
 	}
 
-	void BoxCollider::update()
+	void AABBCollider::update()
 	{
 		Collider::update();
 		boundingBox = this->gameObject->renderer.getGlobalBounds();
 	}
 
-	bool BoxCollider::intersects(Collider* collider)
+	bool AABBCollider::intersects(Collider* collider)
 	{
 		// Check type, then do calculations
 		// Use GPU later
-		BoxCollider* boxCollider = dynamic_cast<BoxCollider*>(collider);
+		AABBCollider* boxCollider = dynamic_cast<AABBCollider*>(collider);
 		if (boxCollider)
 		{
 			return this->boundingBox.intersects(boxCollider->boundingBox);

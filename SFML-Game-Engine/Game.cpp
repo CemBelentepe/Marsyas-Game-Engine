@@ -83,6 +83,7 @@ Scene* mge::Game::getActiveScene()
 
 void Game::startEngine(int startSceneID)
 {
+	window.setKeyRepeatEnabled(false);
 	initScenes(scenes); // Inits the scenes
 	Input::start(&Game::window); // Starts the input system
 	srand(time(NULL)); // Sets the random seed
@@ -97,6 +98,8 @@ void Game::startEngine(int startSceneID)
 		clock.restart();
 		deltaTime = tDeltaTime.asSeconds();
 
+
+		Input::update();
 		updateEvents(); // Updates SFML events
 		update(); // Updates the active scene
 		render(); // Renders the active scene
@@ -131,6 +134,11 @@ void mge::Game::setLimitFPS(int fps)
 	Game::window.setFramerateLimit(fps);
 }
 
+void mge::Game::setVerticalSyncEnabled(bool enabled)
+{
+	Game::window.setVerticalSyncEnabled(enabled);
+}
+
 void mge::Game::exitGame()
 {
 	Game::window.close();
@@ -148,7 +156,6 @@ void Game::initScenes(std::vector<Scene*> scenes)
 void Game::updateEvents()
 {
 	// TODO: Do events
-
 	sf::Event event;
 	while (window.pollEvent(event))
 	{

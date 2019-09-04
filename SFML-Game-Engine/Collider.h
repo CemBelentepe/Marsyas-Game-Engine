@@ -26,12 +26,12 @@ namespace mge
 		virtual bool intersects(Collider* collider);
 	};
 
-	class BoxCollider :public Collider
+	class AABBCollider :public Collider
 	{
 	public:
 		GameObject* gameObject;
 		sf::FloatRect boundingBox;
-		BoxCollider(GameObject* gameObject) : Collider(gameObject)
+		AABBCollider(GameObject* gameObject) : Collider(gameObject)
 		{
 			this->gameObject = gameObject;
 		}

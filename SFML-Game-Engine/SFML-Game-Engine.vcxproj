@@ -161,7 +161,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="MarsiasGameEngine.h" />
+    <ClInclude Include="MarsyasGameEngine.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Mathf.h" />
     <ClInclude Include="Resources.h" />

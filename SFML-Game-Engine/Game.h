@@ -39,6 +39,7 @@ namespace mge
 		static void startEngine(int startSceneID = 0);
 		static void showFPS(bool show = true);
 		static void setLimitFPS(int fps);
+		static void setVerticalSyncEnabled(bool enabled);
 
 		static void exitGame();
 

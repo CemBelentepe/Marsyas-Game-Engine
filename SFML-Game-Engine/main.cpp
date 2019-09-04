@@ -1,4 +1,4 @@
-#include "MarsiasGameEngine.h"
+#include "MarsyasGameEngine.h"
 
 using namespace mge;
 
@@ -13,6 +13,7 @@ class EnemyController;
 int main()
 {
 	Game::createWindow("Game Engine Test", 1200, 900);
+	Game::setLimitFPS(60);
 
 	Resources::loadTexture("player", "Resources/player.png");
 	Resources::loadTexture("enemy", "Resources/enemy.png");
@@ -25,8 +26,7 @@ int main()
 	Game::addScene(scene1);
 	GameObject player("Player", "player", Vector2f(550, 800));
 	scene0->addGameObject(&player);
-	scene1->addGameObject(&player);
-	player.addComponenet<BoxCollider>();
+	player.addComponenet<AABBCollider>();
 	player.addComponenet<PlayerController>();
 	player.addComponenet<GameController>();
 
@@ -67,14 +67,14 @@ public:
 		if (leftTime > 0)
 			leftTime -= Game::deltaTime;
 
-		if (Input::getKeyDown(sf::Keyboard::Key::Left))
+		if (Input::isKeyPressed(Input::Key::Left))
 			gameObject->pos.x -= speed;
-		if (Input::getKeyDown(sf::Keyboard::Key::Right))
+		if (Input::isKeyPressed(Input::Key::Right))
 			gameObject->pos.x += speed;
 
 		gameObject->pos.x = Mathf::clamp(gameObject->pos.x, 0, 1100);
 
-		if (leftTime < 0 && Input::getKeyDown(sf::Keyboard::Key::Space))
+		if (leftTime < 0 && Input::isKeyPressed(Input::Key::Space))
 			shoot();
 	}
 
@@ -87,7 +87,7 @@ public:
 		GameObject* laser = new GameObject("PlayerLaser", "laserPlayer", lPos);
 		Game::getActiveScene()->addGameObject(laser);
 		laser->renderer.resetSprite();
-		laser->addComponenet<BoxCollider>();
+		laser->addComponenet<AABBCollider>();
 		laser->addComponenet<LaserController>();
 	}
 
@@ -95,7 +95,8 @@ public:
 	{
 		if (collider->name == "EnemyLaser")
 		{
-			Debug::log("Player is dead");
+			// Debug::log("Player is dead");
+			Game::getActiveScene()->destroyGameObject(collider);
 		}
 	}
 
@@ -130,7 +131,7 @@ public:
 
 		GameObject* laser = new GameObject("EnemyLaser", "laserEnemy", lPos);
 		gameObject->scene->addGameObject(laser);
-		laser->addComponenet<BoxCollider>();
+		laser->addComponenet<AABBCollider>();
 		laser->addComponenet<LaserController>();
 	}
 	void onColliderEnter(GameObject* collider) override
@@ -150,27 +151,37 @@ public:
 
 	float cooldown = 1.f;
 	float leftTime = 0;
+	int count = 5;
 
 	std::vector<float> fpsRecords;
 	float fpsTimer = 0.1f;
 
 	void update() override
 	{
+		int i = 0;
 		if (leftTime > 0)
 			leftTime -= Game::deltaTime;
-		else
+		else if (count > 0)
 		{
 			GameObject* enemy = new GameObject("Enemy", "enemy", Vector2f(rand() * 1100 / RAND_MAX, 0));
 			Game::getActiveScene()->addGameObject(enemy);
-			enemy->addComponenet<BoxCollider>();
+			enemy->addComponenet<AABBCollider>();
 			enemy->addComponenet<EnemyController>();
 			leftTime = cooldown;
+			count--;
 		}
 
-		if (Input::getKeyDown(sf::Keyboard::A))
+		if (Input::getKeyDown(Input::A))
 		{
-			// Do testing here-------------------------------------------------------------------------------
-			Game::setScene(scene1);
+			Debug::log("Key pressed!!!!");
+		}
+		if (Input::isKeyPressed(Input::A))
+		{
+			Debug::log("!!Key is pressed");
+		}
+		if (Input::getKeyUp(Input::A))
+		{
+			Debug::log("Key released!!!!");
 		}
 
 		if (fpsTimer > 0)
@@ -180,7 +191,7 @@ public:
 			fpsTimer = .1f;
 			fpsRecords.push_back(1 / Game::deltaTime);
 		}
-		if (Input::getKeyDown(sf::Keyboard::Escape))
+		if (Input::getKeyDown(Input::Escape))
 		{
 			float rec = 0;
 			for (auto f : fpsRecords)
