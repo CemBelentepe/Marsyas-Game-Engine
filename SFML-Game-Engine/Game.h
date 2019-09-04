@@ -45,6 +45,6 @@ namespace mge
 		static void addScene(Scene* scene);
 		static void setScene(int sceneID);
 		static void setScene(Scene* scene);
-
+		static Scene* getActiveScene();
 	};
 }

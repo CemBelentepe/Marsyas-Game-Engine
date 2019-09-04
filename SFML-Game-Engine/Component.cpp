@@ -1,20 +1,21 @@
 #include "Component.h"
 
-using namespace mge;
-
-Component::Component(GameObject* gameObject)
+namespace mge
 {
-	this->gameObject = gameObject;
-}
+	Component::Component(GameObject* gameObject)
+	{
+		this->gameObject = gameObject;
+	}
 
-Component::~Component()
-{
-}
+	Component::~Component()
+	{
+	}
 
-void mge::Component::start()
-{
-}
+	void mge::Component::start()
+	{
+	}
 
-void Component::update()
-{
+	void Component::update()
+	{
+	}
 }

@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp""
 #include "SpriteRenderer.h"
 #include "Debug.h"
+#include "Math.h"
 
 namespace mge
 {
@@ -16,19 +17,19 @@ namespace mge
 		void initVariables();
 		void updateComponents();
 	public:
-		mge::SpriteRenderer renderer;
-		mge::Scene* scene;
+		SpriteRenderer renderer;
+		Scene* scene;
 		sf::String name;
-		sf::Vector2f pos;
-		sf::Vector2f scale;
+		Vector2f pos;
+		Vector2f scale;
 		float rotation;
 
 		std::vector<Component*> components;
 		std::vector<Component*> newComponents;
 
-		GameObject(sf::String name, sf::Vector2f pos = sf::Vector2f(0, 0));
-		GameObject(sf::String name, sf::String textureName, sf::Vector2f pos = sf::Vector2f(0, 0));
-		GameObject(sf::String name, sf::String textureName, sf::IntRect textureRect, sf::Vector2f pos = sf::Vector2f(0, 0));
+		GameObject(sf::String name, Vector2f pos = Vector2f(0, 0));
+		GameObject(sf::String name, sf::String textureName, Vector2f pos = Vector2f(0, 0));
+		GameObject(sf::String name, sf::String textureName, IntRect textureRect, Vector2f pos = Vector2f(0, 0));
 		virtual ~GameObject();
 
 		template <class T>

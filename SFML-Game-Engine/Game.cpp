@@ -76,23 +76,32 @@ void Game::setScene(Scene* scene)
 	}
 }
 
+Scene* mge::Game::getActiveScene()
+{
+	return Game::activeScene;
+}
+
 void Game::startEngine(int startSceneID)
 {
-	initScenes(scenes);
-	Input::start(&Game::window);
+	initScenes(scenes); // Inits the scenes
+	Input::start(&Game::window); // Starts the input system
+	srand(time(NULL)); // Sets the random seed
 
-	setScene(startSceneID);
+	setScene(startSceneID); // Sets the active scene
 
+	// Main Game Loop
 	while (window.isOpen())
 	{
+		// Calculates deltaTime := time between frames 
 		tDeltaTime = clock.getElapsedTime();
 		clock.restart();
 		deltaTime = tDeltaTime.asSeconds();
 
-		updateEvents();
-		update();
-		render();
+		updateEvents(); // Updates SFML events
+		update(); // Updates the active scene
+		render(); // Renders the active scene
 
+		 // Shows FPS alongside with the title
 		if (isShowFPS)
 		{
 			float currentFps = 1.0 / deltaTime;

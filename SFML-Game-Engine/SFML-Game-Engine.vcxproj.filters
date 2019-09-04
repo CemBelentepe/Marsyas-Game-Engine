@@ -33,9 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
@@ -63,7 +60,7 @@
     <ClCompile Include="Scene.cpp">
       <Filter>GameEngine\Main</Filter>
     </ClCompile>
-    <ClCompile Include="Math.cpp">
+    <ClCompile Include="Mathf.cpp">
       <Filter>GameEngine\Utils</Filter>
     </ClCompile>
   </ItemGroup>
@@ -97,6 +94,12 @@
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>GameEngine\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathf.h">
+      <Filter>GameEngine\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MarsiasGameEngine.h">
+      <Filter>GameEngine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

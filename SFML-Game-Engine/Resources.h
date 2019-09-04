@@ -3,6 +3,7 @@
 #include <map>
 #include <iostream>
 #include "SFML/Graphics.hpp"
+#include "Math.h"
 
 namespace mge
 {
@@ -15,6 +16,6 @@ namespace mge
 		static bool unloadTexture(std::string name);
 		static sf::Texture getTexture(std::string name);
 		static sf::Sprite* createSpriteFromTexture(std::string name);
-		static sf::Sprite* createSpriteFromTexture(std::string name, sf::IntRect spriteFrame);
+		static sf::Sprite* createSpriteFromTexture(std::string name, IntRect spriteFrame);
 	};
 }
