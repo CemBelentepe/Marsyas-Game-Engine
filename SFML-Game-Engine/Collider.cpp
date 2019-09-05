@@ -64,7 +64,6 @@ namespace mge
 	bool AABBCollider::intersects(Collider* collider)
 	{
 		// Check type, then do calculations
-		// Use GPU later
 		AABBCollider* boxCollider = dynamic_cast<AABBCollider*>(collider);
 		if (boxCollider)
 		{

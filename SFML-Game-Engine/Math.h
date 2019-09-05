@@ -321,6 +321,20 @@ namespace mge
 			return x * vec.x + y * vec.y + z * vec.z;
 		}
 
+		/// <summary>
+		/// Calculates the cross product between this vector and parameter other vector.
+		/// Returns a new vector, normal to the both vector and have the magnitude of their area.
+		/// </summary>
+		/// <param name="other">Other vector to calculate the cross product.</param>
+		/// <returns></returns>
+		Vector3<T> cross(const Vector3<T>& other) const
+		{
+			float x_ = (this->y * other.z) - (this->z * other.y);
+			float y_ = (this->z * other.x) - (this->x * other.z);
+			float z_ = (this->x * other.y) - (this->y * other.x);
+			return Vector3<T>(x_, y_, z_);
+		}
+
 		friend Vector3<T> operator-(const Vector3<T>& right)
 		{
 			return Vector3(-right.x, -right.y, -right.z);
@@ -370,6 +384,14 @@ namespace mge
 		friend Vector3<T> operator*(const Vector3<T>& left, const T right)
 		{
 			return Vector3(right * left.x, right * left.y, right * left.z);
+		}
+
+		friend Vector3<T> operator*(const Vector3<T>& left, const Vector3<T> right)
+		{
+			float x_ = (left.y * right.z) - (left.z * right.y);
+			float y_ = (left.z * right.x) - (left.x * right.z);
+			float z_ = (left.x * right.y) - (left.y * right.x);
+			return Vector3<T>(x_, y_, z_);
 		}
 
 		friend Vector3<T> operator/(const Vector3<T>& left, const T right)
@@ -462,7 +484,7 @@ namespace mge
 		/// Creates a new Rect object from a sf::Rect object.
 		/// </summary>
 		/// <param name="rect">Source object to create from.</param>
-		Rect(sf::Rect<T>& rect) : left(rect.left), top(rect.top), width(rect.width), height(rect.height) {}
+		Rect(const sf::Rect<T>& rect) : left(rect.left), top(rect.top), width(rect.width), height(rect.height) {}
 
 		/// <summary>
 		/// Creates a rectangle using another Rect object with different template.
@@ -513,7 +535,7 @@ namespace mge
 		bool intersects(const Rect<T>& rectangle) const
 		{
 			return (left < rectangle.left + rectangle.width && left + width > rectangle.left &&
-				top > rectangle.top + rectangle.height && top + height < rectangle.top);
+				top < rectangle.top + rectangle.height && top + height > rectangle.top);
 		}
 
 		/// <summary>
@@ -550,6 +572,13 @@ namespace mge
 		friend bool operator!=(const Rect<T>& left, const Rect<T>& right)
 		{
 			return left.left != right.left || left.top != right.top || left.width != right.width || left.height != right.height;
+		}
+
+
+		friend std::ostream& operator<<(std::ostream& out, Rect<T> rect)
+		{
+			out << "([" << rect.left << ", " << rect.top << "], [" << rect.width << ", " << rect.height << "])";
+			return out;
 		}
 
 		operator sf::Rect<T>()

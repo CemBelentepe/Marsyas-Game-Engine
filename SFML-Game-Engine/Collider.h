@@ -2,6 +2,7 @@
 #include <vector>
 #include "SFML/Graphics.hpp"
 #include "Component.h"
+#include "Math.h"
 
 namespace mge
 {
@@ -30,7 +31,7 @@ namespace mge
 	{
 	public:
 		GameObject* gameObject;
-		sf::FloatRect boundingBox;
+		FloatRect boundingBox;
 		AABBCollider(GameObject* gameObject) : Collider(gameObject)
 		{
 			this->gameObject = gameObject;

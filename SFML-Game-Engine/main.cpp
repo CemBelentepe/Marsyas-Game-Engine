@@ -13,7 +13,7 @@ class EnemyController;
 int main()
 {
 	Game::createWindow("Game Engine Test", 1200, 900);
-	Game::setLimitFPS(60);
+	//Game::setLimitFPS(60);
 
 	Resources::loadTexture("player", "Resources/player.png");
 	Resources::loadTexture("enemy", "Resources/enemy.png");
@@ -173,15 +173,7 @@ public:
 
 		if (Input::getKeyDown(Input::A))
 		{
-			Debug::log("Key pressed!!!!");
-		}
-		if (Input::isKeyPressed(Input::A))
-		{
-			Debug::log("!!Key is pressed");
-		}
-		if (Input::getKeyUp(Input::A))
-		{
-			Debug::log("Key released!!!!");
+			// Do Stuff Here --------------------------------------------------------------------------------
 		}
 
 		if (fpsTimer > 0)
