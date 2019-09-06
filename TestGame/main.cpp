@@ -1,4 +1,4 @@
-#include "MarsyasGameEngine.h"
+#include "../SFML-Game-Engine/MarsyasGameEngine.h"
 
 using namespace mge;
 
@@ -13,7 +13,7 @@ class EnemyController;
 int main()
 {
 	Game::createWindow("Game Engine Test", 1200, 900);
-	//Game::setLimitFPS(60);
+	Game::setLimitFPS(60);
 
 	Resources::loadTexture("player", "Resources/player.png");
 	Resources::loadTexture("enemy", "Resources/enemy.png");
@@ -151,7 +151,7 @@ public:
 
 	float cooldown = 1.f;
 	float leftTime = 0;
-	int count = 5;
+	int count = 50;
 
 	std::vector<float> fpsRecords;
 	float fpsTimer = 0.1f;

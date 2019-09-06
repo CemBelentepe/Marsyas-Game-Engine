@@ -135,7 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\SFML-Game-Engine\main.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SFML-Game-Engine\SFML-Game-Engine.vcxproj">
