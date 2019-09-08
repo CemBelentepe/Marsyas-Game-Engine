@@ -4,10 +4,15 @@
 
 namespace mge
 {
-	SpriteRenderer::SpriteRenderer()
+	SpriteRenderer::SpriteRenderer(sf::String textureName) : Renderer()
 	{
-		this->textureName = "default";
-		this->textureRect = IntRect();
+		this->setTexture(textureName);
+		this->setActive(false);
+	}
+
+	SpriteRenderer::SpriteRenderer(sf::String textureName, IntRect textureRect)
+	{
+		this->setTexture(textureName, textureRect);
 		this->setActive(false);
 	}
 
@@ -81,5 +86,14 @@ namespace mge
 		}
 		else
 			delete this->sprite;
+	}
+	Vector2f SpriteRenderer::getSize()
+	{
+		FloatRect rect = sprite->getGlobalBounds();
+		return Vector2f(rect.width, rect.height);
+	}
+	FloatRect SpriteRenderer::getBoundingBox()
+	{
+		return this->sprite->getGlobalBounds();
 	}
 }

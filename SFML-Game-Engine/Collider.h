@@ -32,10 +32,7 @@ namespace mge
 	public:
 		GameObject* gameObject;
 		FloatRect boundingBox;
-		AABBCollider(GameObject* gameObject) : Collider(gameObject)
-		{
-			this->gameObject = gameObject;
-		}
+		AABBCollider(GameObject* gameObject);
 
 		void update() override;
 		bool intersects(Collider* collider) override;

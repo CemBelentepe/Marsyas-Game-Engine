@@ -8,7 +8,7 @@ namespace mge
 	class Input
 	{
 	public:
-		static enum Key
+		enum Key
 		{
 			Unknown = -1, A = 0, B, C,
 			D, E, F, G,
@@ -39,7 +39,7 @@ namespace mge
 			BackSpace = Backspace, BackSlash = Backslash, SemiColon = Semicolon, Return = Enter
 		};
 
-		static enum MouseButton
+		enum MouseButton
 		{
 			MouseLeft, MouseRight, MouseMiddle, MouseXButton1,
 			MouseXButton2, MouseButtonCount

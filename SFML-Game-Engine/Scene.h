@@ -4,20 +4,29 @@
 namespace mge
 {
 	class GameObject;
+	class UIGameObject;
 	class Collider;
 
 	class Scene
 	{
 	private:
 		sf::String name;
-
 		sf::RenderWindow* window;
-		std::vector<GameObject*> gameObjects;
-		std::vector<Collider*> colliders;
 
-		std::vector<GameObject*> destroyedObjects;
-		std::vector<GameObject*> removedObjects;
+		//Game Objects
+		std::vector<GameObject*> m_GameObjects;
+		std::vector<Collider*> m_Colliders;
 
+		std::vector<GameObject*> m_DestroyedObjects;
+		std::vector<GameObject*> m_RemovedObjects;
+
+		// UI Game Objects
+		std::vector<UIGameObject*> m_UIGameObjects;
+
+		std::vector<UIGameObject*> m_DestroyedUIObjects;
+		std::vector<UIGameObject*> m_RemovedUIObjects;
+
+		// Functions
 		void updateGameObjects();
 		void updateGUI();
 		void updateCollisions();
@@ -25,8 +34,11 @@ namespace mge
 		void renderGameObjects();
 		void renderGUI();
 
-		void privRemoveGameObject(GameObject* gameObject);
-		void privDestroyGameObject(GameObject* gameObject);
+		void m_RemoveGameObject(GameObject* gameObject);
+		void m_DestroyGameObject(GameObject* gameObject);
+
+		void m_RemoveUIGameObject(UIGameObject* gameObject);
+		void m_DestroyUIGameObject(UIGameObject* gameObject);
 
 		void registerDestroys();
 	public:
@@ -42,6 +54,10 @@ namespace mge
 		void addGameObject(GameObject* gameObject);
 		void removeGameObject(GameObject* gameObject);
 		void destroyGameObject(GameObject* gameObject);
+
+		void addUIGameObject(UIGameObject* gameObject);
+		void removeUIGameObject(UIGameObject* gameObject);
+		void destroyUIGameObject(UIGameObject* gameObject);
 
 		void setGameObjects(std::vector<GameObject*> gameObjects);
 

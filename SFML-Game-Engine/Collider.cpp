@@ -1,6 +1,7 @@
 #include "Collider.h"
 #include "GameObject.h"
 #include "Debug.h"
+#include "SpriteRenderer.h"
 #include <algorithm>
 
 namespace mge
@@ -55,10 +56,16 @@ namespace mge
 		return false;
 	}
 
+	AABBCollider::AABBCollider(GameObject* gameObject) : Collider(gameObject)
+	{
+		this->gameObject = gameObject;
+		this->boundingBox = gameObject->renderer->getBoundingBox();
+	}
+
 	void AABBCollider::update()
 	{
 		Collider::update();
-		boundingBox = this->gameObject->renderer.getGlobalBounds();
+		boundingBox = gameObject->renderer->getBoundingBox();
 	}
 
 	bool AABBCollider::intersects(Collider* collider)

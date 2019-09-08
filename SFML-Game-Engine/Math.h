@@ -564,6 +564,48 @@ namespace mge
 			return true;
 		}
 
+		/// <summary>
+		/// Sets the position of the rect.
+		/// </summary>
+		/// <param name="x">Left position of the rect</param>
+		/// <param name="y">Top position of the rect.</param>
+		void setPosition(T x, T y)
+		{
+			this->left = x;
+			this->top = y;
+		}
+
+		/// <summary>
+		/// Sets the position of the rect.
+		/// </summary>
+		/// <param name="pos">Position of the top-left position of the rect.</param>
+		void setPosition(const Vector2<T>& pos)
+		{
+			this->left = pos.x;
+			this->top = pos.y;
+		}
+
+		/// <summary>
+		/// Sets the size of the rect.
+		/// </summary>
+		/// <param name="width">Width of the rect.</param>
+		/// <param name="height">Height of the rect.</param>
+		void setSize(T width, T height)
+		{
+			this->width = width;
+			this->height = height;
+		}
+
+		/// <summary>
+		/// Sets the size of the rect.
+		/// </summary>
+		/// <param name="size">A vector whose x, y parameters are width and height of the size respectively.</param>
+		void setSize(const Vector2<T>& size)
+		{
+			this->width = size.x;
+			this->height = size.y;
+		}
+
 		friend bool operator==(const Rect<T>& left, const Rect<T>& right)
 		{
 			return left.left == right.left && left.top == right.top && left.width == right.width && left.height == right.height;

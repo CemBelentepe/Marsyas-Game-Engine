@@ -10,29 +10,7 @@ class GameController;
 class LaserController;
 class EnemyController;
 
-int main()
-{
-	Game::createWindow("Game Engine Test", 1200, 900);
-	Game::setLimitFPS(60);
-
-	Resources::loadTexture("player", "Resources/player.png");
-	Resources::loadTexture("enemy", "Resources/enemy.png");
-	Resources::loadTexture("laserPlayer", "Resources/laser1.png");
-	Resources::loadTexture("laserEnemy", "Resources/laser2.png");
-
-	scene0 = new Scene("Scene 0");
-	scene1 = new Scene("Scene 1");
-	Game::addScene(scene0);
-	Game::addScene(scene1);
-	GameObject player("Player", "player", Vector2f(550, 800));
-	scene0->addGameObject(&player);
-	player.addComponenet<AABBCollider>();
-	player.addComponenet<PlayerController>();
-	player.addComponenet<GameController>();
-
-	Game::startEngine();
-	return 0;
-}
+int score = 0;
 
 class LaserController :public Component
 {
@@ -86,7 +64,6 @@ public:
 
 		GameObject* laser = new GameObject("PlayerLaser", "laserPlayer", lPos);
 		Game::getActiveScene()->addGameObject(laser);
-		laser->renderer.resetSprite();
 		laser->addComponenet<AABBCollider>();
 		laser->addComponenet<LaserController>();
 	}
@@ -138,6 +115,7 @@ public:
 	{
 		if (collider->name == "PlayerLaser")
 		{
+			score++;
 			Game::getActiveScene()->destroyGameObject(this->gameObject);
 			Game::getActiveScene()->destroyGameObject(collider);
 		}
@@ -147,6 +125,8 @@ public:
 class GameController :public Component
 {
 public:
+	Text* scoreText;
+
 	GameController(GameObject* gameObject) : Component(gameObject) {}
 
 	float cooldown = 1.f;
@@ -193,5 +173,40 @@ public:
 			Debug::log("FPS: " + std::to_string(rec));
 			Game::exitGame();
 		}
+		sf::String s_score = "Score: " + std::to_string(score);
+		scoreText->sfText.setString(s_score);
 	}
 };
+
+int main()
+{
+	Game::createWindow("Game Engine Test", 1200, 900);
+	//Game::setLimitFPS(60);
+
+	Resources::loadTexture("player", "Resources/player.png");
+	Resources::loadTexture("enemy", "Resources/enemy.png");
+	Resources::loadTexture("laserPlayer", "Resources/laser1.png");
+	Resources::loadTexture("laserEnemy", "Resources/laser2.png");
+
+	scene0 = new Scene("Scene 0");
+	scene1 = new Scene("Scene 1");
+	Game::addScene(scene0);
+	Game::addScene(scene1);
+	GameObject player("Player", "player", Vector2f(550, 800));
+	scene0->addGameObject(&player);
+	player.addComponenet<AABBCollider>();
+	player.addComponenet<PlayerController>();
+	player.addComponenet<GameController>();
+
+	UIGameObject scoreText("ScoreText");
+	scene0->addUIGameObject(&scoreText);
+	scoreText.pos = Vector2f(0, 0);
+	scoreText.addUIComponenet<Text>();
+	scoreText.getUIComponent<Text>()->sfText.setString("Score");
+	scoreText.getUIComponent<Text>()->sfText.setCharacterSize(36);
+
+	player.getComponent<GameController>()->scoreText = scoreText.getUIComponent<Text>();
+
+	Game::startEngine();
+	return 0;
+}

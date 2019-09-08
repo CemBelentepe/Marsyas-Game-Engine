@@ -2,6 +2,8 @@
 #include "Component.h"
 #include "Scene.h"
 #include "Collider.h"
+#include "Renderer.h"
+#include "SpriteRenderer.h"
 
 namespace mge
 {
@@ -20,7 +22,6 @@ namespace mge
 		for (auto c : newComponents)
 		{
 			components.push_back(c);
-			c->start();
 
 			Collider* collider = dynamic_cast<Collider*>(c);
 			if (collider)
@@ -28,6 +29,12 @@ namespace mge
 				this->scene->addCollider(collider);
 			}
 		}
+
+		for (auto c : newComponents)
+		{
+			c->start();
+		}
+
 		newComponents.clear();
 
 		// Updates all of the components (newly added too), if they are enabled
@@ -42,15 +49,14 @@ namespace mge
 	{
 		this->initVariables();
 		this->name = name;
-		this->renderer.setTexture("default");
-		this->renderer.setPosition(pos);
+		this->renderer = nullptr;
 	}
 
 	GameObject::GameObject(sf::String name, sf::String textureName, Vector2f pos)
 	{
 		this->initVariables();
 		this->name = name;
-		this->renderer.setTexture(textureName);
+		this->renderer = new SpriteRenderer(textureName);
 		this->pos = pos;
 	}
 
@@ -58,7 +64,7 @@ namespace mge
 	{
 		this->initVariables();
 		this->name = name;
-		this->renderer.setTexture(textureName, textureRect);
+		this->renderer = new SpriteRenderer(textureName, textureRect);
 		this->pos = pos;
 	}
 
@@ -68,13 +74,13 @@ namespace mge
 		{
 			delete comp;
 		}
-
+		delete renderer;
 	}
 
 	void GameObject::init(Scene* scene)
 	{
 		this->scene = scene;
-		this->renderer.setActive(true);
+		this->renderer->setActive(true);
 		for (auto comp : components)
 		{
 			Collider* col = dynamic_cast<Collider*>(comp);
@@ -88,15 +94,15 @@ namespace mge
 
 	void GameObject::update()
 	{
+		this->renderer->setPosition(this->pos);
+		this->renderer->setScale(this->scale);
+		this->renderer->setRotation(this->rotation);
 		this->updateComponents();
-		this->renderer.setPosition(this->pos);
-		this->renderer.setScale(this->scale);
-		this->renderer.setRotation(this->rotation);
 	}
 
 	void GameObject::render(sf::RenderWindow* window)
 	{
-		this->renderer.render(window);
+		this->renderer->render(window);
 	}
 
 	void GameObject::setActive(bool active)

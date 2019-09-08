@@ -1,6 +1,5 @@
 #pragma once
-#include "SFML/Graphics.hpp""
-#include "SpriteRenderer.h"
+#include "SFML/Graphics.hpp"
 #include "Debug.h"
 #include "Math.h"
 
@@ -8,16 +7,19 @@ namespace mge
 {
 	class Scene;
 	class Component;
+	class Renderer;
 
 	class GameObject
 	{
 	private:
+		std::vector<Component*> newComponents;
+	protected:
 		bool enabled = true;
 
 		void initVariables();
 		void updateComponents();
 	public:
-		SpriteRenderer renderer;
+		Renderer* renderer;
 		Scene* scene;
 		sf::String name;
 		Vector2f pos;
@@ -25,7 +27,6 @@ namespace mge
 		float rotation;
 
 		std::vector<Component*> components;
-		std::vector<Component*> newComponents;
 
 		GameObject(sf::String name, Vector2f pos = Vector2f(0, 0));
 		GameObject(sf::String name, sf::String textureName, Vector2f pos = Vector2f(0, 0));

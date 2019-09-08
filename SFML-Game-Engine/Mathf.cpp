@@ -82,7 +82,7 @@ namespace mge
 	}
 	float Mathf::root(float number, float degree)
 	{
-		return pow(number, 1.f/degree);
+		return pow(number, 1.f / degree);
 	}
 	float Mathf::sqrt(float number)
 	{
@@ -109,23 +109,73 @@ namespace mge
 	}
 	float Mathf::rand01()
 	{
-		return static_cast<float>(std::rand())/static_cast<float>(RAND_MAX);
+		return static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
 	}
 	float Mathf::rand(float a, float b)
 	{
-		return ((static_cast<float>(std::rand()) * (b-a) / static_cast<float>(RAND_MAX)) + a);
+		return ((static_cast<float>(std::rand()) * (b - a) / static_cast<float>(RAND_MAX)) + a);
 	}
 	int Mathf::rand(int a, int b)
 	{
-		return std::rand()%(b-a) + a;
+		return std::rand() % (b - a) + a;
 	}
 	int Mathf::rand(int b)
 	{
-		return std::rand()%b;
+		return std::rand() % b;
 	}
 	void Mathf::setRandSeed(unsigned int seed)
 	{
 		std::srand(seed);
+	}
+	float Mathf::sin(float angle, bool isRad)
+	{
+		if (isRad)
+			return sinf(angle);
+		else
+			return sinf(angle / 180.0f);
+	}
+	float Mathf::cos(float angle, bool isRad)
+	{
+		if (isRad)
+			return std::cosf(angle);
+		else
+			return std::cosf(angle / 180.0f);
+	}
+	float Mathf::tan(float angle, bool isRad)
+	{
+		if (isRad)
+			return std::tanf(angle);
+		else
+			return std::tanf(angle / 180.0f);
+	}
+	float Mathf::cot(float angle, bool isRad)
+	{
+		return 1.0f / tan(angle, isRad);
+	}
+	float Mathf::asin(float number, bool isRad)
+	{
+		if (isRad)
+			return std::asinf(number);
+		else
+			return 180.0 * std::asinf(number);
+	}
+	float Mathf::acos(float number, bool isRad)
+	{
+		if (isRad)
+			return std::acosf(number);
+		else
+			return 180.0f * std::acosf(number);
+	}
+	float Mathf::atan(float number, bool isRad)
+	{
+		if (isRad)
+			return std::atanf(number);
+		else
+			return 180*std::atanf(number);
+	}
+	float Mathf::acot(float number, bool isRad)
+	{
+		return atan(1/number, isRad);
 	}
 	float Mathf::log(float number)
 	{
