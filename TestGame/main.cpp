@@ -125,7 +125,7 @@ public:
 class GameController :public Component
 {
 public:
-	Text* scoreText;
+	Text* scoreText = nullptr;
 
 	GameController(GameObject* gameObject) : Component(gameObject) {}
 
@@ -181,7 +181,7 @@ public:
 int main()
 {
 	Game::createWindow("Game Engine Test", 1200, 900);
-	//Game::setLimitFPS(60);
+	//Game::setLimitFPS(30);
 
 	Resources::loadTexture("player", "Resources/player.png");
 	Resources::loadTexture("enemy", "Resources/enemy.png");
@@ -192,6 +192,7 @@ int main()
 	scene1 = new Scene("Scene 1");
 	Game::addScene(scene0);
 	Game::addScene(scene1);
+
 	GameObject player("Player", "player", Vector2f(550, 800));
 	scene0->addGameObject(&player);
 	player.addComponenet<AABBCollider>();

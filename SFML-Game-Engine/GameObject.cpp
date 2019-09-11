@@ -86,7 +86,6 @@ namespace mge
 			Collider* col = dynamic_cast<Collider*>(comp);
 			if (col)
 			{
-				Debug::log("Collider added");
 				scene->addCollider(col);
 			}
 		}

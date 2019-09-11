@@ -34,6 +34,7 @@ namespace mge
 		FloatRect boundingBox;
 		AABBCollider(GameObject* gameObject);
 
+		void start() override;
 		void update() override;
 		bool intersects(Collider* collider) override;
 	};

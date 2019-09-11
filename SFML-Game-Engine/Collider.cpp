@@ -62,10 +62,15 @@ namespace mge
 		this->boundingBox = gameObject->renderer->getBoundingBox();
 	}
 
+	void AABBCollider::start()
+	{
+		this->boundingBox = gameObject->renderer->getBoundingBox();
+	}
+
 	void AABBCollider::update()
 	{
 		Collider::update();
-		boundingBox = gameObject->renderer->getBoundingBox();
+		this->boundingBox = gameObject->renderer->getBoundingBox();
 	}
 
 	bool AABBCollider::intersects(Collider* collider)
