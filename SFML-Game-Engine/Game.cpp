@@ -1,6 +1,6 @@
 #include "Game.h"
-#include "Debug.h"
 #include "Input.h"
+#include "Debug.h"
 
 using namespace mge;
 
@@ -155,7 +155,6 @@ void Game::initScenes(std::vector<Scene*> scenes)
 
 void Game::updateEvents()
 {
-	// TODO: Do events
 	sf::Event event;
 	while (window.pollEvent(event))
 	{
@@ -190,5 +189,6 @@ void Game::render()
 {
 	window.clear();
 	activeScene->render();
+	activeScene->renderColliders(); // TODO: Delete it before release
 	window.display();
 }

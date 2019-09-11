@@ -1,5 +1,4 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "UIComponent.h"
 #include "Math.h"
 #include "Renderer.h"

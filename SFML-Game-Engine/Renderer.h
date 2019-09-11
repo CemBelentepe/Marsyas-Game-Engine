@@ -14,7 +14,6 @@ namespace mge
 	{
 	protected:
 		Vector2f pos;
-		Vector2f offset;
 		Vector2f scale;
 		float rotation;
 
@@ -22,6 +21,7 @@ namespace mge
 
 		bool enabled = true;
 	public:
+		Vector2f offset;
 		virtual ~Renderer() {}
 
 		virtual void render(sf::RenderWindow* window) = 0;

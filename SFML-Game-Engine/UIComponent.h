@@ -1,6 +1,5 @@
 #pragma once
-
-class sf::RenderWindow;
+#include <SFML/Graphics.hpp>
 
 namespace mge
 {

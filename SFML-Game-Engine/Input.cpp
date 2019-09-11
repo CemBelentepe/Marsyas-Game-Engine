@@ -1,5 +1,4 @@
 #include "Input.h"
-#include "Debug.h"
 
 namespace mge
 {

@@ -1,7 +1,7 @@
 #pragma once
-#include "SFML/Graphics.hpp"
 #include "Debug.h"
 #include "Math.h"
+#include <vector>
 
 namespace mge
 {

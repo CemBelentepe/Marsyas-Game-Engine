@@ -136,6 +136,8 @@ public:
 	std::vector<float> fpsRecords;
 	float fpsTimer = 0.1f;
 
+	bool showingColliders = false;
+
 	void update() override
 	{
 		int i = 0;
@@ -154,6 +156,8 @@ public:
 		if (Input::getKeyDown(Input::A))
 		{
 			// Do Stuff Here --------------------------------------------------------------------------------
+			showingColliders = !showingColliders;
+			scene0->showColliders(showingColliders);
 		}
 
 		if (fpsTimer > 0)

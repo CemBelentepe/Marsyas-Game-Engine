@@ -83,9 +83,8 @@ namespace mge
 		}
 	}
 
-	Scene::Scene(sf::String name)
+	Scene::Scene(sf::String name): name(name), colliderShow(false)
 	{
-		this->name = name;
 		this->m_Colliders = std::vector<Collider*>();
 	}
 
@@ -141,7 +140,7 @@ namespace mge
 	void Scene::addUIGameObject(UIGameObject* gameObject)
 	{
 		gameObject->scene = this;
-		if(gameObject->renderer)
+		if (gameObject->renderer)
 			gameObject->renderer->setActive(true);
 		this->m_UIGameObjects.push_back(gameObject);
 	}
@@ -209,6 +208,28 @@ namespace mge
 		for (auto gameObject : gameObjects)
 		{
 			gameObject->scene = this;
+		}
+	}
+
+	void Scene::showColliders(bool show)
+	{
+		this->colliderShow = show;
+	}
+
+	void Scene::renderColliders()
+	{
+		if (colliderShow)
+		{
+			for (auto collider : this->m_Colliders)
+			{
+				sf::RectangleShape box;
+				box.setPosition(collider->gameObject->renderer->getPosition() + collider->gameObject->renderer->offset);
+				box.setSize(collider->gameObject->renderer->getSize());
+				box.setFillColor(sf::Color::Transparent);
+				box.setOutlineThickness(2);
+				box.setOutlineColor(sf::Color::Green);
+				window->draw(box);
+			}
 		}
 	}
 

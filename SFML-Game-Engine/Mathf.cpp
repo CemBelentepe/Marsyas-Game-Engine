@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <cmath>
 
+
 namespace mge
 {
 	const float Mathf::E = 2.71828;

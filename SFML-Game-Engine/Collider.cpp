@@ -1,6 +1,5 @@
 #include "Collider.h"
 #include "GameObject.h"
-#include "Debug.h"
 #include "SpriteRenderer.h"
 #include <algorithm>
 

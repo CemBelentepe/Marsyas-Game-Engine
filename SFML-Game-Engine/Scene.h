@@ -1,5 +1,5 @@
 #pragma once
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 
 namespace mge
 {
@@ -19,6 +19,8 @@ namespace mge
 
 		std::vector<GameObject*> m_DestroyedObjects;
 		std::vector<GameObject*> m_RemovedObjects;
+
+		bool colliderShow;
 
 		// UI Game Objects
 		std::vector<UIGameObject*> m_UIGameObjects;
@@ -60,6 +62,9 @@ namespace mge
 		void destroyUIGameObject(UIGameObject* gameObject);
 
 		void setGameObjects(std::vector<GameObject*> gameObjects);
+
+		void showColliders(bool show);
+		void renderColliders();
 
 		void addCollider(Collider* collider);
 
