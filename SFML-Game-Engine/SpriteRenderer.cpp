@@ -7,12 +7,14 @@ namespace mge
 	SpriteRenderer::SpriteRenderer(sf::String textureName) : Renderer()
 	{
 		this->setTexture(textureName);
+		this->setAlign(AlignMode::CENTER);
 		this->setActive(false);
 	}
 
 	SpriteRenderer::SpriteRenderer(sf::String textureName, IntRect textureRect)
 	{
 		this->setTexture(textureName, textureRect);
+		this->setAlign(AlignMode::CENTER);
 		this->setActive(false);
 	}
 
@@ -25,7 +27,45 @@ namespace mge
 	{
 		if (enabled)
 		{
-			this->sprite->setPosition(this->pos);
+			Vector2f size = ((FloatRect)this->sprite->getGlobalBounds()).getSize();
+			this->offset = Vector2f();
+
+			switch (align)
+			{
+			case AlignMode::TOP_LEFT:
+				break;
+			case AlignMode::TOP_CENTER:
+				this->offset.x -= size.x / 2;
+				break;
+			case AlignMode::TOP_RIGHT:
+				this->offset.x -= size.x;
+				break;
+
+			case AlignMode::CENTER_LEFT:
+				this->offset.y -= size.y / 2;
+				break;
+			case AlignMode::CENTER:
+				this->offset.y -= size.y / 2;
+				this->offset.x -= size.x / 2;
+				break;
+			case AlignMode::CENTER_RIGHT:
+				this->offset.y -= size.y / 2;
+				this->offset.x -= size.x;
+				break;
+
+			case AlignMode::BOTTOM_LEFT:
+				this->offset.y -= size.y;
+				break;
+			case AlignMode::BOTTOM_CENTER:
+				this->offset.y -= size.y;
+				this->offset.x -= size.x / 2;
+				break;
+			case AlignMode::BOTTOM_RIGHT:
+				this->offset.x -= size.x;
+				this->offset.y -= size.y;
+				break;
+			}
+			this->sprite->setPosition(this->pos + this->offset);
 			this->sprite->setScale(this->scale);
 			this->sprite->setRotation(this->rotation);
 
@@ -80,7 +120,7 @@ namespace mge
 		{
 			this->sprite = Resources::createSpriteFromTexture(this->textureName, this->textureRect);
 
-			this->sprite->setPosition(this->pos);
+			this->sprite->setPosition(this->pos + this->offset);
 			this->sprite->setScale(this->scale);
 			this->sprite->setRotation(this->rotation);
 		}

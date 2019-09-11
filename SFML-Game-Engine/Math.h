@@ -606,6 +606,24 @@ namespace mge
 			this->height = size.y;
 		}
 
+		/// <summary>
+		/// Returns the position of the rect as Vector2(left, top).
+		/// </summary>
+		/// <returns>Position of the rect as a Vector2.</returns>
+		Vector2<T> getPosition()
+		{
+			return Vector2<T>(left, top);
+		}
+
+		/// <summary>
+		/// Returns the size of the rect as Vector2(width, height).
+		/// </summary>
+		/// <returns>Size of the rect as a Vector2.</returns>
+		Vector2<T> getSize()
+		{
+			return Vector2<T>(width, height);
+		}
+
 		friend bool operator==(const Rect<T>& left, const Rect<T>& right)
 		{
 			return left.left == right.left && left.top == right.top && left.width == right.width && left.height == right.height;

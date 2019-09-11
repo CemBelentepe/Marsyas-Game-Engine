@@ -50,7 +50,7 @@ public:
 		if (Input::isKeyPressed(Input::Key::Right))
 			gameObject->pos.x += speed;
 
-		gameObject->pos.x = Mathf::clamp(gameObject->pos.x, 0, 1100);
+		gameObject->pos.x = Mathf::clamp(gameObject->pos.x, 50, 1150);
 
 		if (leftTime < 0 && Input::isKeyPressed(Input::Key::Space))
 			shoot();
@@ -60,7 +60,7 @@ public:
 	{
 		leftTime = cooldown;
 		Vector2f lPos = gameObject->pos;
-		lPos.x += 50;
+		lPos.y -= 50;
 
 		GameObject* laser = new GameObject("PlayerLaser", "laserPlayer", lPos);
 		Game::getActiveScene()->addGameObject(laser);
@@ -104,7 +104,7 @@ public:
 	{
 		leftTime = cooldown;
 		Vector2f lPos = gameObject->pos;
-		lPos.x += 50;
+		lPos.y += 50;
 
 		GameObject* laser = new GameObject("EnemyLaser", "laserEnemy", lPos);
 		gameObject->scene->addGameObject(laser);
@@ -143,7 +143,7 @@ public:
 			leftTime -= Game::deltaTime;
 		else if (count > 0)
 		{
-			GameObject* enemy = new GameObject("Enemy", "enemy", Vector2f(rand() * 1100 / RAND_MAX, 0));
+			GameObject* enemy = new GameObject("Enemy", "enemy", Vector2f(Mathf::rand(50, 1150), 0));
 			Game::getActiveScene()->addGameObject(enemy);
 			enemy->addComponenet<AABBCollider>();
 			enemy->addComponenet<EnemyController>();
@@ -174,7 +174,7 @@ public:
 			Game::exitGame();
 		}
 		sf::String s_score = "Score: " + std::to_string(score);
-		scoreText->sfText.setString(s_score);
+		scoreText->setText(s_score);
 	}
 };
 
@@ -193,7 +193,7 @@ int main()
 	Game::addScene(scene0);
 	Game::addScene(scene1);
 
-	GameObject player("Player", "player", Vector2f(550, 800));
+	GameObject player("Player", "player", Vector2f(600, 850));
 	scene0->addGameObject(&player);
 	player.addComponenet<AABBCollider>();
 	player.addComponenet<PlayerController>();
@@ -203,8 +203,8 @@ int main()
 	scene0->addUIGameObject(&scoreText);
 	scoreText.pos = Vector2f(0, 0);
 	scoreText.addUIComponenet<Text>();
-	scoreText.getUIComponent<Text>()->sfText.setString("Score");
-	scoreText.getUIComponent<Text>()->sfText.setCharacterSize(36);
+	scoreText.getUIComponent<Text>()->setText("Score");
+	scoreText.getUIComponent<Text>()->setFontSize(36);
 
 	player.getComponent<GameController>()->scoreText = scoreText.getUIComponent<Text>();
 
