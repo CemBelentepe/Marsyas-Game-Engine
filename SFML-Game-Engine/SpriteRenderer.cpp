@@ -84,7 +84,7 @@ namespace mge
 	void SpriteRenderer::setTexture(sf::String textureName)
 	{
 		this->textureName = textureName;
-		sf::Vector2u textureRect = Resources::getTexture(textureName).getSize();
+		sf::Vector2u textureRect = Resources::getTexture(textureName)->getSize();
 		this->textureRect = IntRect(0, 0, textureRect.x, textureRect.y);
 		this->resetSprite();
 	}

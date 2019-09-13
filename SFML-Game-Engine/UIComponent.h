@@ -3,7 +3,7 @@
 
 namespace mge
 {
-	class GameObject;
+	class UIGameObject;
 	class Renderer;
 
 	class UIComponent
@@ -11,10 +11,10 @@ namespace mge
 	private:
 		bool enabled = true;
 	public:
-		GameObject* gameObject;
+		UIGameObject* gameObject;
 		Renderer* renderer;
 
-		UIComponent(GameObject* gameObject) :gameObject(gameObject)
+		UIComponent(UIGameObject* gameObject) :gameObject(gameObject)
 		{
 			this->renderer = nullptr;
 		}
@@ -26,9 +26,9 @@ namespace mge
 		virtual void start() {}
 		virtual void update() {}
 		virtual void render(sf::RenderWindow* window) {}
-		virtual void onColliderEnter(GameObject* collider) {}
-		virtual void onColliderStay(GameObject* collider) {}
-		virtual void onColliderLeave(GameObject* collider) {}
+		virtual void onColliderEnter(UIGameObject* collider) {}
+		virtual void onColliderStay(UIGameObject* collider) {}
+		virtual void onColliderLeave(UIGameObject* collider) {}
 
 		virtual bool isActive() { return this->enabled; }
 		virtual void setActive(bool active) { this->enabled = active; }

@@ -9,14 +9,17 @@ sf::String Game::title = "";
 bool Game::isShowFPS = false;
 float Game::lastFPSs[10] = { 0,0,0,0,0,0,0,0,0 };
 int Game::fpsInc = 0;
+float Game::msFrame = 0;
 
-sf::Clock Game::clock = sf::Clock::Clock();
+sf::Clock Game::renderClock = sf::Clock::Clock();
+sf::Clock Game::updateClock = sf::Clock::Clock();
 sf::Time Game::tDeltaTime = sf::Time::Zero;
 
 std::vector<Scene*> Game::scenes;
 Scene* Game::activeScene = nullptr;
 int Game::activeSceneID = 0;
 
+float Game::timeScale = 1;
 float Game::deltaTime = 0;
 
 void Game::loadScenes(std::vector<Scene*> scenes)
@@ -93,33 +96,39 @@ void Game::startEngine(int startSceneID)
 	// Main Game Loop
 	while (window.isOpen())
 	{
-		// Calculates deltaTime := time between frames 
-		tDeltaTime = clock.getElapsedTime();
-		clock.restart();
-		deltaTime = tDeltaTime.asSeconds();
-
-
-		Input::update();
-		updateEvents(); // Updates SFML events
-		update(); // Updates the active scene
-		render(); // Renders the active scene
-
-		 // Shows FPS alongside with the title
-		if (isShowFPS)
+		tDeltaTime = updateClock.getElapsedTime();
+		if (tDeltaTime.asMicroseconds() >= msFrame / timeScale)
 		{
-			float currentFps = 1.0 / deltaTime;
-			lastFPSs[fpsInc] = currentFps;
-			fpsInc++;
-			if (fpsInc == 10)
-				fpsInc = 0;
+			updateClock.restart();
+			deltaTime = tDeltaTime.asSeconds() * timeScale;
 
-			float fps = 0;
-			for (float f : lastFPSs)
-				fps += f;
-			fps /= 10;
-			int fpsi = (int)(100.0 * fps);
-			fps = fpsi / 100.0;
-			window.setTitle(title + " - " + std::to_string(fps) + "fps");
+			Input::update(); // Updates Input register
+			updateEvents(); // Updates SFML events
+			update(); // Updates the active scene
+		}
+		if ((renderClock.getElapsedTime()).asMicroseconds() >= msFrame || timeScale > 1)
+		{
+			renderClock.restart();
+
+			render(); // Renders the active scene
+
+			 // Shows FPS alongside with the title
+			if (isShowFPS)
+			{
+				float currentFps = 1.0 / deltaTime;
+				lastFPSs[fpsInc] = currentFps;
+				fpsInc++;
+				if (fpsInc == 10)
+					fpsInc = 0;
+
+				float fps = 0;
+				for (float f : lastFPSs)
+					fps += f;
+				fps /= 10;
+				int fpsi = (int)(100.0 * fps);
+				fps = fpsi / 100.0;
+				window.setTitle(title + " - " + std::to_string(fps) + "fps");
+			}
 		}
 	}
 }
@@ -129,9 +138,10 @@ void mge::Game::showFPS(bool show)
 	Game::isShowFPS = show;
 }
 
-void mge::Game::setLimitFPS(int fps)
+void mge::Game::setFPS(unsigned int fps)
 {
-	Game::window.setFramerateLimit(fps);
+	if (fps == 0) msFrame = 0;
+	else msFrame = 1000000.f / fps;
 }
 
 void mge::Game::setVerticalSyncEnabled(bool enabled)

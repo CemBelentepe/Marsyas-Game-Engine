@@ -17,6 +17,19 @@ namespace mge
 
 	void GameObject::updateComponents()
 	{
+		// Removes Colliders
+		for (auto c : removedComponents)
+		{
+			components.erase(std::remove(components.begin(), components.end(), c), components.end());
+
+			Collider* collider = dynamic_cast<Collider*>(c);
+			if (collider)
+			{
+				this->scene->removeCollider(collider);
+			}
+		}
+		removedComponents.clear();
+
 		// Adds the new components to the all components vector then
 		// Starts the components even if they are enabled or not!
 		for (auto c : newComponents)
@@ -56,16 +69,22 @@ namespace mge
 	{
 		this->initVariables();
 		this->name = name;
-		this->renderer = new SpriteRenderer(textureName);
 		this->pos = pos;
+		this->renderer = new SpriteRenderer(textureName);
+		this->renderer->setPosition(this->pos);
+		this->renderer->setScale(this->scale);
+		this->renderer->setRotation(this->rotation);
 	}
 
 	GameObject::GameObject(sf::String name, sf::String textureName, IntRect textureRect, Vector2f pos)
 	{
 		this->initVariables();
 		this->name = name;
-		this->renderer = new SpriteRenderer(textureName, textureRect);
 		this->pos = pos;
+		this->renderer = new SpriteRenderer(textureName, textureRect);
+		this->renderer->setPosition(this->pos);
+		this->renderer->setScale(this->scale);
+		this->renderer->setRotation(this->rotation);
 	}
 
 	GameObject::~GameObject()
@@ -93,14 +112,14 @@ namespace mge
 
 	void GameObject::update()
 	{
-		this->renderer->setPosition(this->pos);
-		this->renderer->setScale(this->scale);
-		this->renderer->setRotation(this->rotation);
 		this->updateComponents();
 	}
 
 	void GameObject::render(sf::RenderWindow* window)
 	{
+		this->renderer->setPosition(this->pos);
+		this->renderer->setScale(this->scale);
+		this->renderer->setRotation(this->rotation);
 		this->renderer->render(window);
 	}
 

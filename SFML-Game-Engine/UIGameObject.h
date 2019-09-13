@@ -19,7 +19,7 @@ namespace mge
 		void render(sf::RenderWindow* window) override;
 
 		template <class T>
-		void addUIComponenet()
+		void addUIComponent()
 		{
 			bool contains = false;
 			for (auto comp : UIComponents)
@@ -56,5 +56,6 @@ namespace mge
 			}
 			return nullptr;
 		}
+
 	};
 }

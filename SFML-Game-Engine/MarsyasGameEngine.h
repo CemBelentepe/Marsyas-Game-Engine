@@ -14,6 +14,8 @@
 #include "UIGameObject.h"
 #include "UIComponent.h"
 #include "Text.h"
+#include "Button.h"
+#include "Image.h"
 
 #include "Mathf.h"
 #include "Math.h"

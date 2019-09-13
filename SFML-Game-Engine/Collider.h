@@ -10,7 +10,6 @@ namespace mge
 	class Collider :public Component
 	{
 	public:
-		GameObject* gameObject;
 		std::vector<GameObject*> lastColliders;
 		std::vector<GameObject*> frameColliders;
 
@@ -29,7 +28,6 @@ namespace mge
 	class AABBCollider :public Collider
 	{
 	public:
-		GameObject* gameObject;
 		FloatRect boundingBox;
 		AABBCollider(GameObject* gameObject);
 

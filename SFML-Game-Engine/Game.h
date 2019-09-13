@@ -16,7 +16,11 @@ namespace mge
 		static float lastFPSs[10];
 		static int fpsInc;
 
-		static sf::Clock clock;
+		static sf::Clock renderClock;
+		static sf::Clock updateClock;
+
+		static sf::Time tDeltaTime;
+		static float msFrame;
 
 		static std::vector<Scene*> scenes;
 		static Scene* activeScene;
@@ -29,7 +33,7 @@ namespace mge
 		static void render();
 
 	public:
-		static sf::Time tDeltaTime;
+		static float timeScale;
 		static float deltaTime;
 
 		Game() {}
@@ -38,7 +42,7 @@ namespace mge
 		static void createWindow(const char* title, int width, int height, bool fullscreen = false);
 		static void startEngine(int startSceneID = 0);
 		static void showFPS(bool show = true);
-		static void setLimitFPS(int fps);
+		static void setFPS(unsigned int fps);
 		static void setVerticalSyncEnabled(bool enabled);
 
 		static void exitGame();

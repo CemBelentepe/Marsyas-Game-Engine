@@ -1,11 +1,12 @@
 #include "Text.h"
-#include "GameObject.h"
+#include "UIGameObject.h"
 
 namespace mge
 {
 	void Text::render(sf::RenderWindow* window)
 	{
 		Vector2f size = ((FloatRect)this->sfText.getGlobalBounds()).getSize();
+		size.y *= 2;
 		this->renderPos = gameObject->pos;
 
 		switch (align)
@@ -45,12 +46,28 @@ namespace mge
 		}
 
 		this->sfText.setPosition(renderPos);
+		sfText.setFillColor(color);
+
 		window->draw(sfText);
+
+		// To see the outline of the text
+		// sf::RectangleShape rect(size);
+		// rect.setPosition(renderPos);
+		// rect.setFillColor(sf::Color::Transparent);
+		// rect.setOutlineColor(sf::Color::Green);
+		// rect.setOutlineThickness(2);
+		// window->draw(rect);
 	}
 
 	void Text::setText(sf::String text)
 	{
 		sfText.setString(text);
+	}
+
+	void Text::setFont(std::string name)
+	{
+		font = Resources::getFont(name);
+		sfText.setFont(*font);
 	}
 
 	void Text::setFontSize(unsigned int fontSize)

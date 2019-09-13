@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Mathf.h"
+#include "Debug.h"
 
 namespace mge
 {
@@ -103,6 +104,15 @@ namespace mge
 		float dot(const Vector2<T>& vec) const
 		{
 			return x * vec.x + y * vec.y;
+		}
+
+		static Vector2<float> randomInsideUnitCircle()
+		{
+			float a = Mathf::rand(0, 360);
+			float r = Mathf::rand01();
+			float x = r * Mathf::cos(a);
+			float y = r * Mathf::sin(a);
+			return Vector2<float>(x, y);
 		}
 
 		friend Vector2<T> operator-(const Vector2<T>& right)
@@ -320,7 +330,6 @@ namespace mge
 		{
 			return x * vec.x + y * vec.y + z * vec.z;
 		}
-
 		/// <summary>
 		/// Calculates the cross product between this vector and parameter other vector.
 		/// Returns a new vector, normal to the both vector and have the magnitude of their area.
@@ -333,6 +342,17 @@ namespace mge
 			float y_ = (this->z * other.x) - (this->x * other.z);
 			float z_ = (this->x * other.y) - (this->y * other.x);
 			return Vector3<T>(x_, y_, z_);
+		}
+
+		static Vector3<float> randomInsideUnitCircle()
+		{
+			float t = Mathf::rand(0, 360);
+			float p = Mathf::rand(0, 360);
+			float r = Mathf::rand01();
+			float x = r * Mathf::sin(p) * Mathf::cos(t);
+			float y = r * Mathf::sin(p) * Mathf::sin(t);
+			float z = r * Mathf::sin(p);
+			return Vector3<float>(x, y, z);
 		}
 
 		friend Vector3<T> operator-(const Vector3<T>& right)
@@ -651,4 +671,197 @@ namespace mge
 	typedef Rect<float> FloatRect;
 	typedef Rect<double> DoubleRect;
 	typedef Rect<unsigned int> UIntRect;
+
+	template <int M, int N, class T>
+	class Matrix
+	{
+	public:
+		T data[M * N];
+		Matrix()
+		{
+			for (size_t i = 0; i < M * N; i++)
+				this->data[i] = 0;
+		}
+		Matrix(const T data[M * N])
+		{
+			for (size_t i = 0; i < M * N; i++)
+				this->data[i] = data[i];
+		}
+
+		template <class U>
+		Matrix(const Matrix<M, N, U>& matrix)
+		{
+			for (size_t i = 0; i < M * N; i++)
+				this->data[i] = static_cast<U>(matrix.m_data[i]);
+		}
+
+		Matrix(const sf::Transform& transform)
+		{
+			if (M == 4 && N == 4)
+			{
+				for (size_t i = 0; i < M * N; i++)
+					data[i] = transform.getMatrix()[i];
+			}
+			else
+			{
+				Debug::logError("Matrix must be a 4x4 float template");
+			}
+		}
+		//~Matrix();
+
+		const T& getDataAt(unsigned int col, unsigned int row)
+		{
+			if (col < M && row < N)
+			{
+				return data[M * row + col];
+			}
+			else
+			{
+				Debug::logError("Position (" + std::to_string(col) + ", " + std::to_string(row) + ") for data do not exists for returning.");
+				return 0;
+			}
+		}
+
+		void setDataAt(unsigned int col, unsigned int row, T value)
+		{
+			if (col < M && row < N)
+				data[M * row + col] = value;
+			else
+				Debug::logError("Position (" + std::to_string(col) + ", " + std::to_string(row) + ") for data do not exists for setting.");
+		}
+
+		// Operators
+		friend bool operator==(const Matrix<M, N, T>& left, const Matrix<M, N, T>& right)
+		{
+			for (size_t i = 0; i < M * N; i++)
+				if (left.data[i] != right.data[i]) return false;
+
+			return true;
+		}
+
+		friend bool operator!=(const Matrix<M, N, T>& left, const Matrix<M, N, T>& right)
+		{
+			for (size_t i = 0; i < M * N; i++)
+				if (left.data[i] == right.data[i]) return false;
+
+			return true;
+		}
+
+		friend std::ostream& operator<<(std::ostream& out, const Matrix<M, N, T> matrix)
+		{
+			for (int i = 0; i < M; i++)
+			{
+				for (int j = 0; j < N; j++)
+				{
+					out << matrix.data[M * j + i] << " ";
+				}
+				out << "\n";
+			}
+			return out;
+		}
+
+		template <int P>
+		friend Matrix<M, P, T> operator*(const Matrix<M, N, T>& left, const Matrix<N, P, T>& right)
+		{
+			T data[M * P];
+			for (int i = 0; i < M; i++)
+			{
+				for (int j = 0; j < P; j++)
+				{
+					T& c = data[M * j + i];
+					c = 0;
+					for (int k = 0; k < P; k++)
+					{
+						c += left.data[i + M * k] * right.data[k + N * j];
+					}
+				}
+			}
+			return Matrix<M, P, T>(data);
+		}
+
+		friend Matrix<M, N, T> operator*(T left, const Matrix<M, N, T>& right)
+		{
+			T result_data[M * N];
+			for (size_t i = 0; i < M * N; i++)
+			{
+				result_data[i] = left * right.data[i];
+			}
+			return Matrix<M, N, T>(result_data);
+		}
+		friend Matrix<M, N, T> operator*(const Matrix<M, N, T>& left, const T& right)
+		{
+			T result_data[M * N];
+			for (size_t i = 0; i < M * N; i++)
+			{
+				result_data[i] = right * left.data[i];
+			}
+			return Matrix<M, N, T>(result_data);
+		}
+
+		friend Matrix<M, N, T>& operator*=(Matrix<M, N, T>& left, const T& right)
+		{
+			for (size_t i = 0; i < M * N; i++)
+			{
+				left.data[i] = right * left.data[i];
+			}
+			return left;
+		}
+
+		friend Matrix<M, N, T>& operator-(Matrix<M, N, T>& right)
+		{
+			for (size_t i = 0; i < M * N; i++)
+				right.data[i] *= -1;
+			return right;
+		}
+		friend Matrix<M, N, T> operator+(const Matrix<M, N, T>& left, const Matrix<M, N, T>& right)
+		{
+			T result_data[M * N];
+			for (size_t i = 0; i < M * N; i++)
+				result_data[i] = right.data[i] + left.data[i];
+
+			return Matrix<M, N, T>(result_data);
+		}
+		friend Matrix<M, N, T> operator-(const Matrix<M, N, T>& left, const Matrix<M, N, T>& right)
+		{
+			T result_data[M * N];
+			for (size_t i = 0; i < M * N; i++)
+				result_data[i] = right.data[i] - left.data[i];
+
+			return Matrix<M, N, T>(result_data);
+		}
+		friend Matrix<M, N, T> operator/(const Matrix<M, N, T>& left, const T& right)
+		{
+			T result_data[M * N];
+			for (size_t i = 0; i < M * N; i++)
+				result_data[i] = right.data[i] / left;
+
+			return Matrix<M, N, T>(result_data);
+		}
+
+		friend Matrix<M, N, T>& operator/=(Matrix<M, N, T>& left, const T& right)
+		{
+			for (size_t i = 0; i < M * N; i++)
+				left.data[i] /= right;
+
+			return left;
+		}
+		friend Matrix<M, N, T>& operator+=(Matrix<M, N, T>& left, const Matrix<M, N, T>& right)
+		{
+			for (size_t i = 0; i < M * N; i++)
+				left.data[i] += right.data[i];
+
+			return left;
+		}
+		friend Matrix<M, N, T>& operator-=(Matrix<M, N, T>& left, const Matrix<M, N, T>& right)
+		{
+			for (size_t i = 0; i < M * N; i++)
+				left.data[i] -= right.data[i];
+
+			return left;
+		}
+	};
+
+	typedef Matrix<4, 4, float>	Matrix4f;
+	typedef Matrix<3, 3, float>	Matrix3f;
+	typedef Matrix<2, 2, float>	Matrix2f;
 }

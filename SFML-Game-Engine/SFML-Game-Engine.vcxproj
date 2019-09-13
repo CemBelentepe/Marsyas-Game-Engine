@@ -176,6 +176,7 @@
     </ClCompile>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Mathf.cpp" />
     <ClCompile Include="Resources.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Image.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="MarsyasGameEngine.h" />
     <ClInclude Include="Math.h" />

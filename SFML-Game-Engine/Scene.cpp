@@ -3,6 +3,7 @@
 #include "UIGameObject.h"
 #include "Collider.h"
 #include "SpriteRenderer.h"
+#include <algorithm>
 
 namespace mge
 {
@@ -83,7 +84,7 @@ namespace mge
 		}
 	}
 
-	Scene::Scene(sf::String name): name(name), colliderShow(false)
+	Scene::Scene(sf::String name) : name(name), window(nullptr), colliderShow(false)
 	{
 		this->m_Colliders = std::vector<Collider*>();
 	}
@@ -236,6 +237,11 @@ namespace mge
 	void Scene::addCollider(Collider* collider)
 	{
 		this->m_Colliders.push_back(collider);
+	}
+
+	void Scene::removeCollider(Collider* collider)
+	{
+		m_Colliders.erase(std::remove(m_Colliders.begin(), m_Colliders.end(), collider), m_Colliders.end());
 	}
 
 	void Scene::setWindow(sf::RenderWindow* window)

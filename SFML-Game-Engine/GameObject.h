@@ -13,6 +13,7 @@ namespace mge
 	{
 	private:
 		std::vector<Component*> newComponents;
+		std::vector<Component*> removedComponents;
 	protected:
 		bool enabled = true;
 
@@ -34,7 +35,7 @@ namespace mge
 		virtual ~GameObject();
 
 		template <class T>
-		void addComponenet()
+		void addComponent()
 		{
 			bool contains = false;
 			for (auto comp : components)
@@ -70,6 +71,22 @@ namespace mge
 				if (component) return component;
 			}
 			return nullptr;
+		}
+
+		template <class T>
+		bool removeComponent()
+		{
+			for (auto comp : components)
+			{
+				T* x = static_cast<T*>(comp);
+				if (x)
+				{
+					removedComponents.push_back(x);
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		virtual void init(Scene* scene);

@@ -67,6 +67,7 @@ namespace mge
 		void renderColliders();
 
 		void addCollider(Collider* collider);
+		void removeCollider(Collider* collider);
 
 		void setWindow(sf::RenderWindow* window);
 	};

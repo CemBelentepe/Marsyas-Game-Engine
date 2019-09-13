@@ -15,6 +15,12 @@ namespace mge
 
 	void Input::update()
 	{
+		for (auto& key : mouseButtonState)
+		{
+			if (key.second > 0) key.second = 1;
+			else key.second = -1;
+		}
+
 		for (auto& key : keyState)
 		{
 			if (key.second > 0) key.second = 1;
@@ -38,7 +44,21 @@ namespace mge
 
 	void Input::updateMouseButtonPressed(sf::Mouse::Button button, int value)
 	{
-		mouseButtonState[(MouseButton)(int)button] = value;
+		int& x = mouseButtonState[(MouseButton)(int)button]; 
+		if (value == 1)
+		{
+			if (x > 0)
+				x = 1;
+			else
+				x = 2;
+		}
+		else
+		{
+			if (x > 0)
+				x = -2;
+			else
+				x = -1;
+		}
 	}
 
 	void Input::updateKeyPressed(sf::Keyboard::Key key, int value)
@@ -47,24 +67,16 @@ namespace mge
 		if (value == 1)
 		{
 			if (x > 0)
-			{
 				x = 1;
-			}
 			else
-			{
 				x = 2;
-			}
 		}
 		else
 		{
 			if (x > 0)
-			{
 				x = -2;
-			}
 			else
-			{
 				x = -1;
-			}
 		}
 	}
 
@@ -75,22 +87,22 @@ namespace mge
 
 	bool Input::isMouseButtonPressed(MouseButton button)
 	{
-		return sf::Mouse::isButtonPressed((sf::Mouse::Button)button);
+		return mouseButtonState[button] > 0;
 	}
 
 	bool Input::getMouseButtonDown(MouseButton button)
 	{
-		return mouseButtonState[button] > 0;
+		return mouseButtonState[button] == 2;
 	}
 
 	bool Input::getMouseButtonUp(MouseButton button)
 	{
-		return mouseButtonState[button] < 0;
+		return mouseButtonState[button] == -2;
 	}
 
 	bool Input::isKeyPressed(Input::Key key)
 	{
-		return keyState[key] == 1;
+		return keyState[key] > 0;
 	}
 
 	bool Input::getKeyDown(Input::Key key)

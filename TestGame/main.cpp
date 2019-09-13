@@ -45,14 +45,14 @@ public:
 		if (leftTime > 0)
 			leftTime -= Game::deltaTime;
 
-		if (Input::isKeyPressed(Input::Key::Left))
+		if (Input::isKeyPressed(Input::Left))
 			gameObject->pos.x -= speed;
-		if (Input::isKeyPressed(Input::Key::Right))
+		if (Input::isKeyPressed(Input::Right))
 			gameObject->pos.x += speed;
 
 		gameObject->pos.x = Mathf::clamp(gameObject->pos.x, 50, 1150);
 
-		if (leftTime < 0 && Input::isKeyPressed(Input::Key::Space))
+		if (leftTime < 0 && Input::isKeyPressed(Input::Space))
 			shoot();
 	}
 
@@ -64,8 +64,8 @@ public:
 
 		GameObject* laser = new GameObject("PlayerLaser", "laserPlayer", lPos);
 		Game::getActiveScene()->addGameObject(laser);
-		laser->addComponenet<AABBCollider>();
-		laser->addComponenet<LaserController>();
+		laser->addComponent<AABBCollider>();
+		laser->addComponent<LaserController>();
 	}
 
 	void onColliderEnter(GameObject* collider) override
@@ -90,9 +90,7 @@ public:
 	void update() override
 	{
 		if (gameObject->pos.y < 450)
-		{
 			gameObject->pos.y += 200 * Game::deltaTime;
-		}
 
 		if (leftTime > 0)
 			leftTime -= Game::deltaTime;
@@ -108,8 +106,8 @@ public:
 
 		GameObject* laser = new GameObject("EnemyLaser", "laserEnemy", lPos);
 		gameObject->scene->addGameObject(laser);
-		laser->addComponenet<AABBCollider>();
-		laser->addComponenet<LaserController>();
+		laser->addComponent<AABBCollider>();
+		laser->addComponent<LaserController>();
 	}
 	void onColliderEnter(GameObject* collider) override
 	{
@@ -125,6 +123,8 @@ public:
 class GameController :public Component
 {
 public:
+	bool spawn = true;
+
 	Text* scoreText = nullptr;
 
 	GameController(GameObject* gameObject) : Component(gameObject) {}
@@ -143,12 +143,12 @@ public:
 		int i = 0;
 		if (leftTime > 0)
 			leftTime -= Game::deltaTime;
-		else if (count > 0)
+		else if (count > 0 && spawn)
 		{
-			GameObject* enemy = new GameObject("Enemy", "enemy", Vector2f(Mathf::rand(50, 1150), 0));
+			GameObject* enemy = new GameObject("Enemy", "enemy", Vector2f(Mathf::rand(50, 1150), -50));
 			Game::getActiveScene()->addGameObject(enemy);
-			enemy->addComponenet<AABBCollider>();
-			enemy->addComponenet<EnemyController>();
+			enemy->addComponent<AABBCollider>();
+			enemy->addComponent<EnemyController>();
 			leftTime = cooldown;
 			count--;
 		}
@@ -156,8 +156,20 @@ public:
 		if (Input::getKeyDown(Input::A))
 		{
 			// Do Stuff Here --------------------------------------------------------------------------------
-			showingColliders = !showingColliders;
-			scene0->showColliders(showingColliders);
+			Game::timeScale *= 0.5f;
+			Debug::log(Game::timeScale);
+		}
+		if (Input::getKeyDown(Input::B))
+		{
+			// Do Stuff Here --------------------------------------------------------------------------------
+			Game::timeScale *= 2.f;
+			Debug::log(Game::timeScale);
+		}
+		if (Input::getKeyDown(Input::C))
+		{
+			// Do Stuff Here --------------------------------------------------------------------------------
+			Game::setFPS(48);
+			Debug::log(Game::timeScale);
 		}
 
 		if (fpsTimer > 0)
@@ -182,10 +194,19 @@ public:
 	}
 };
 
+void onClickFunc()
+{
+	Debug::log("Clicked");
+}
+
 int main()
 {
 	Game::createWindow("Game Engine Test", 1200, 900);
-	//Game::setLimitFPS(30);
+	Game::setFPS(144);
+	// Game::showFPS();
+
+	Resources::loadFont("arial", "Resources/arial.ttf");
+	Resources::loadTexture("button", "Resources/button.png");
 
 	Resources::loadTexture("player", "Resources/player.png");
 	Resources::loadTexture("enemy", "Resources/enemy.png");
@@ -199,16 +220,33 @@ int main()
 
 	GameObject player("Player", "player", Vector2f(600, 850));
 	scene0->addGameObject(&player);
-	player.addComponenet<AABBCollider>();
-	player.addComponenet<PlayerController>();
-	player.addComponenet<GameController>();
+	player.addComponent<AABBCollider>();
+	player.addComponent<PlayerController>();
+	player.addComponent<GameController>();
 
 	UIGameObject scoreText("ScoreText");
 	scene0->addUIGameObject(&scoreText);
 	scoreText.pos = Vector2f(0, 0);
-	scoreText.addUIComponenet<Text>();
+	scoreText.addUIComponent<Text>();
 	scoreText.getUIComponent<Text>()->setText("Score");
 	scoreText.getUIComponent<Text>()->setFontSize(36);
+
+	/*UIGameObject button0("Button");
+	scene0->addUIGameObject(&button0);
+	button0.pos = Vector2f(600, 450);
+	button0.addUIComponent<Button>();
+	button0.addUIComponent<Image>();
+	button0.addUIComponent<Text>();
+	button0.getUIComponent<Button>()->setAlign(AlignMode::CENTER);
+	button0.getUIComponent<Button>()->setSize(Vector2f(300, 60));
+	button0.getUIComponent<Button>()->AddOnClickedEvent(onClickFunc);
+	button0.getUIComponent<Image>()->setTexture("button");
+	button0.getUIComponent<Image>()->setAlign(AlignMode::CENTER);
+	button0.getUIComponent<Image>()->setSize(Vector2f(300, 60));
+	button0.getUIComponent<Text>()->setAlign(AlignMode::CENTER);
+	button0.getUIComponent<Text>()->setText("Restart");
+	button0.getUIComponent<Text>()->setFontSize(36);
+	button0.getUIComponent<Text>()->setColor(sf::Color::Black);*/
 
 	player.getComponent<GameController>()->scoreText = scoreText.getUIComponent<Text>();
 
