@@ -9,6 +9,8 @@ namespace mge
 {
 	void Scene::updateGameObjects()
 	{
+		this->registerDestroys();
+		this->registerAdds();
 		// TODO: optimize
 		for (size_t i = 0; i < m_GameObjects.size(); i++)
 		{
@@ -82,6 +84,18 @@ namespace mge
 		{
 			m_RemoveUIGameObject(obj);
 		}
+		this->m_RemovedObjects.clear();
+		this->m_DestroyedObjects.clear();
+	}
+
+	void Scene::registerAdds()
+	{
+		for (auto gameObject : m_AddedGameObjects)
+		{
+			gameObject->init(this);
+			this->m_GameObjects.push_back(gameObject);
+		}
+		this->m_AddedGameObjects.clear();
 	}
 
 	Scene::Scene(sf::String name) : name(name), window(nullptr), colliderShow(false)
@@ -91,24 +105,27 @@ namespace mge
 
 	void Scene::load()
 	{
+		this->start();
 		for (auto gameObject : m_GameObjects)
 		{
 			gameObject->init(this);
 		}
 	}
 
-	void Scene::lateUpdate()
-	{
-		this->registerDestroys();
-		this->m_RemovedObjects.clear();
-		this->m_DestroyedObjects.clear();
-	}
+	// void Scene::unload()
+	// {
+	// 	for (auto gameObject : m_GameObjects)
+	// 	{
+	// 		delete gameObject;
+	// 	}
+	// }
 
-	void Scene::update()
+	void Scene::preUpdate()
 	{
 		this->updateGameObjects();
 		this->updateCollisions();
 		this->updateGUI();
+		this->update();
 	}
 
 	void Scene::render()
@@ -119,9 +136,7 @@ namespace mge
 
 	void Scene::addGameObject(GameObject* gameObject)
 	{
-		gameObject->scene = this;
-		gameObject->renderer->setActive(true);
-		this->m_GameObjects.push_back(gameObject);
+		m_AddedGameObjects.push_back(gameObject);
 	}
 
 	void Scene::removeGameObject(GameObject* gameObject)
@@ -247,5 +262,16 @@ namespace mge
 	void Scene::setWindow(sf::RenderWindow* window)
 	{
 		this->window = window;
+	}
+
+	GameObject* Scene::findGameObject(sf::String name)
+	{
+		for (auto gameObject : m_GameObjects)
+		{
+			if (gameObject->name == name)
+				return gameObject;
+		}
+		Debug::logError("Game Object with the name x could not have found.");
+		return nullptr;
 	}
 }

@@ -12,7 +12,7 @@ namespace mge
 	class GameObject
 	{
 	private:
-		std::vector<Component*> newComponents;
+		std::vector<Component*> addedComponents;
 		std::vector<Component*> removedComponents;
 	protected:
 		bool enabled = true;
@@ -51,7 +51,7 @@ namespace mge
 			if (!contains)
 			{
 				Component* component = new T(this);
-				this->newComponents.push_back(component);
+				this->addedComponents.push_back(component);
 			}
 			else
 				Debug::logWarning("Gameobject contains the same component already.");
@@ -65,7 +65,7 @@ namespace mge
 				T* component = dynamic_cast<T*>(comp);
 				if (component) return component;
 			}
-			for (auto comp : newComponents)
+			for (auto comp : addedComponents)
 			{
 				T* component = dynamic_cast<T*>(comp);
 				if (component) return component;

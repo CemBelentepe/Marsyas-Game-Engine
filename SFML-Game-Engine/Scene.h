@@ -20,6 +20,8 @@ namespace mge
 		std::vector<GameObject*> m_DestroyedObjects;
 		std::vector<GameObject*> m_RemovedObjects;
 
+		std::vector<GameObject*> m_AddedGameObjects;
+
 		bool colliderShow;
 
 		// UI Game Objects
@@ -43,15 +45,19 @@ namespace mge
 		void m_DestroyUIGameObject(UIGameObject* gameObject);
 
 		void registerDestroys();
+		void registerAdds();
 	public:
 		Scene(sf::String name);
 		//~Scene();
 
 		void load();
+		// void unload();
 
-		void lateUpdate();
-		void update();
+		void preUpdate();
 		void render();
+
+		virtual void start() = 0;
+		virtual void update() = 0;
 
 		void addGameObject(GameObject* gameObject);
 		void removeGameObject(GameObject* gameObject);
@@ -70,5 +76,7 @@ namespace mge
 		void removeCollider(Collider* collider);
 
 		void setWindow(sf::RenderWindow* window);
+
+		GameObject* findGameObject(sf::String name);
 	};
 }

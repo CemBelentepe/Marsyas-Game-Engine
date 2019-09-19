@@ -32,7 +32,7 @@ namespace mge
 
 		// Adds the new components to the all components vector then
 		// Starts the components even if they are enabled or not!
-		for (auto c : newComponents)
+		for (auto c : addedComponents)
 		{
 			components.push_back(c);
 
@@ -43,12 +43,12 @@ namespace mge
 			}
 		}
 
-		for (auto c : newComponents)
+		for (auto c : addedComponents)
 		{
 			c->start();
 		}
 
-		newComponents.clear();
+		addedComponents.clear();
 
 		// Updates all of the components (newly added too), if they are enabled
 		for (auto c : components)
@@ -99,7 +99,7 @@ namespace mge
 	void GameObject::init(Scene* scene)
 	{
 		this->scene = scene;
-		this->renderer->setActive(true);
+		if (this->renderer) this->renderer->setActive(this->enabled);
 		for (auto comp : components)
 		{
 			Collider* col = dynamic_cast<Collider*>(comp);

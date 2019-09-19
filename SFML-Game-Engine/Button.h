@@ -12,18 +12,18 @@ namespace mge
 	private:
 		FloatRect rect;
 		AlignMode align;
-		std::vector<void(*)()> onClickedEvents;
-		std::vector<void(*)()> onHoveredEvents;
+		std::vector<void(*)(GameObject*)> onClickedEvents;
+		std::vector<void(*)(GameObject*)> onHoveredEvents;
 	public:
 
 		Button(UIGameObject* gameObject) : UIComponent(gameObject), rect(gameObject->pos, {250, 50}), align(AlignMode::TOP_LEFT) {}
 		// ~Button();
 
-		void AddOnClickedEvent(void(*onClickedEvent)());
-		void RemoveOnClickedEvent(void(*onClickedEvent)());
+		void AddOnClickedEvent(void(*onClickedEvent)(GameObject*));
+		void RemoveOnClickedEvent(void(*onClickedEvent)(GameObject*));
 
-		void AddOnHoveredEvent(void(*onHoveredEvent)());
-		void RemoveOnHoveredEvent(void(*onHoveredEvent)());
+		void AddOnHoveredEvent(void(*onHoveredEvent)(GameObject*));
+		void RemoveOnHoveredEvent(void(*onHoveredEvent)(GameObject*));
 
 		void update() override;
 

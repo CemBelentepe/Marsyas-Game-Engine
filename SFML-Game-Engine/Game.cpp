@@ -47,6 +47,9 @@ void Game::addScene(Scene* scene)
 
 void Game::setScene(int sceneID)
 {
+	// if(activeScene)
+	// 	activeScene->unload();
+
 	activeSceneID = sceneID;
 	if (sceneID < static_cast<int>(scenes.size()))
 	{
@@ -104,9 +107,10 @@ void Game::startEngine(int startSceneID)
 
 			Input::update(); // Updates Input register
 			updateEvents(); // Updates SFML events
+
 			update(); // Updates the active scene
 		}
-		if ((renderClock.getElapsedTime()).asMicroseconds() >= msFrame || timeScale > 1)
+		if ((renderClock.getElapsedTime()).asMicroseconds() >= msFrame || timeScale > 1 ||timeScale == 0)
 		{
 			renderClock.restart();
 
@@ -191,8 +195,7 @@ void Game::updateEvents()
 
 void Game::update()
 {
-	activeScene->update();
-	activeScene->lateUpdate();
+	activeScene->preUpdate();
 }
 
 void Game::render()

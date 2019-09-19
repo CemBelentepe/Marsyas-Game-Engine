@@ -3,25 +3,25 @@
 #include "Input.h"
 #include <algorithm>
 
-void mge::Button::AddOnClickedEvent(void(*onClickedEvent)())
+void mge::Button::AddOnClickedEvent(void(*onClickedEvent)(GameObject*))
 {
 	if (std::find(onClickedEvents.begin(), onClickedEvents.end(), onClickedEvent) == onClickedEvents.end())
 		onClickedEvents.push_back(onClickedEvent);
 	else
 		Debug::logWarning("Button has the same function already");
 }
-void mge::Button::RemoveOnClickedEvent(void(*onClickedEvent)())
+void mge::Button::RemoveOnClickedEvent(void(*onClickedEvent)(GameObject*))
 {
 	onClickedEvents.erase(std::remove(onClickedEvents.begin(), onClickedEvents.end(), onClickedEvent), onClickedEvents.end());
 }
-void mge::Button::AddOnHoveredEvent(void(*onHoveredEvent)())
+void mge::Button::AddOnHoveredEvent(void(*onHoveredEvent)(GameObject*))
 {
 	if (std::find(onHoveredEvents.begin(), onHoveredEvents.end(), onHoveredEvent) == onHoveredEvents.end())
 		onHoveredEvents.push_back(onHoveredEvent);
 	else
 		Debug::logWarning("Button has the same function already");
 }
-void mge::Button::RemoveOnHoveredEvent(void(*onHoveredEvent)())
+void mge::Button::RemoveOnHoveredEvent(void(*onHoveredEvent)(GameObject*))
 {
 	onHoveredEvents.erase(std::remove(onHoveredEvents.begin(), onHoveredEvents.end(), onHoveredEvent), onHoveredEvents.end());
 }
@@ -72,11 +72,11 @@ void mge::Button::update()
 	{
 		// Hover
 		for (auto func : onHoveredEvents)
-			func();
+			func(this->gameObject);
 
 		// Click
 		if (Input::getMouseButtonDown(Input::MouseButton::MouseLeft))
 			for (auto func : onClickedEvents)
-				func();
+				func(this->gameObject);
 	}
 }
