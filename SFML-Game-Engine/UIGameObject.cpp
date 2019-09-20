@@ -20,8 +20,9 @@ namespace mge
 		newUIComponents.clear();
 
 		// Updates all of the components (newly added too), if they are enabled
-		for (auto c : UIComponents)
+		for (size_t i = 0; i < UIComponents.size(); i++)
 		{
+			UIComponent*& c = UIComponents.at(i);
 			if (c->isActive())
 				c->update();
 		}

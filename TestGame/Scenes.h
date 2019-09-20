@@ -64,7 +64,7 @@ public:
 		exitButton->addUIComponent<Text>();
 		exitButton->getUIComponent<Button>()->setAlign(AlignMode::CENTER);
 		exitButton->getUIComponent<Button>()->setSize(Vector2f(300, 60));
-		exitButton->getUIComponent<Button>()->AddOnClickedEvent(endGame);
+		exitButton->getUIComponent<Button>()->AddOnClickedEvent(exitGame);
 		exitButton->getUIComponent<Image>()->setTexture("button");
 		exitButton->getUIComponent<Image>()->setAlign(AlignMode::CENTER);
 		exitButton->getUIComponent<Image>()->setSize(Vector2f(300, 60));
@@ -73,12 +73,13 @@ public:
 		exitButton->getUIComponent<Text>()->setFontSize(36);
 		exitButton->getUIComponent<Text>()->setColor(sf::Color::Black);
 
+
 		this->addGameObject(player);
 		this->addUIGameObject(scoreText);
-
 		this->addUIGameObject(resumeButton);
 		this->addUIGameObject(menuButton);
 		this->addUIGameObject(exitButton);
+
 
 		player->getComponent<GameController>()->menuButtons.push_back(resumeButton);
 		player->getComponent<GameController>()->menuButtons.push_back(menuButton);
@@ -104,10 +105,10 @@ public:
 
 	static void openMenu(GameObject* sender)
 	{
-		Game::setScene(0);
+		Game::setActiveScene(0);
 	}
 
-	static void endGame(GameObject* sender)
+	static void exitGame(GameObject* sender)
 	{
 		Game::exitGame();
 	}
@@ -144,17 +145,17 @@ public:
 		endButton->addUIComponent<Text>();
 		endButton->getUIComponent<Button>()->setAlign(AlignMode::CENTER);
 		endButton->getUIComponent<Button>()->setSize(Vector2f(300, 60));
-		endButton->getUIComponent<Button>()->AddOnClickedEvent(endGame);
+		endButton->getUIComponent<Button>()->AddOnClickedEvent(exitGame);
 		endButton->getUIComponent<Image>()->setTexture("button");
 		endButton->getUIComponent<Image>()->setAlign(AlignMode::CENTER);
 		endButton->getUIComponent<Image>()->setSize(Vector2f(300, 60));
 		endButton->getUIComponent<Text>()->setAlign(AlignMode::CENTER);
-		endButton->getUIComponent<Text>()->setText("End Game");
+		endButton->getUIComponent<Text>()->setText("Exit Game");
 		endButton->getUIComponent<Text>()->setFontSize(36);
 		endButton->getUIComponent<Text>()->setColor(sf::Color::Black);
-
-		this->addGameObject(startButton);
+		
 		this->addGameObject(endButton);
+		this->addGameObject(startButton);
 	}
 
 	void update() override
@@ -164,10 +165,10 @@ public:
 
 	static void startGame(GameObject* sender)
 	{
-		Game::setScene(1);
+		Game::setActiveScene(1);
 	}
 
-	static void endGame(GameObject* sender)
+	static void exitGame(GameObject* sender)
 	{
 		Game::exitGame();
 	}

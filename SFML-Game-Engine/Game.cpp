@@ -45,16 +45,18 @@ void Game::addScene(Scene* scene)
 	scene->setWindow(&window);
 }
 
-void Game::setScene(int sceneID)
+void Game::setActiveScene(int sceneID)
 {
-	// if(activeScene)
-	// 	activeScene->unload();
+	Game::timeScale = 1.f;
+	Scene* prevScene = activeScene;
 
 	activeSceneID = sceneID;
 	if (sceneID < static_cast<int>(scenes.size()))
 	{
 		activeScene = scenes.at(sceneID);
 		activeScene->load();
+		if(prevScene)
+			prevScene->unload();
 	}
 	else
 	{
@@ -62,24 +64,11 @@ void Game::setScene(int sceneID)
 	}
 }
 
-void Game::setScene(Scene* scene)
+void mge::Game::setActiveScene(const char* name)
 {
-	bool loaded = false;
 	for (size_t i = 0; i < scenes.size(); i++)
-	{
-		if (scenes.at(i) == scene)
-		{
-			activeSceneID = i;
-			activeScene = scenes.at(i);
-			activeScene->load();
-			loaded = true;
-			break;
-		}
-	}
-	if (!loaded)
-	{
-		Debug::logError("Scene did not found."); // Add the id of the name of the scene later. TODO
-	}
+		if (scenes.at(i)->name == name)
+			setActiveScene(i);
 }
 
 Scene* mge::Game::getActiveScene()
@@ -94,7 +83,7 @@ void Game::startEngine(int startSceneID)
 	Input::start(&Game::window); // Starts the input system
 	srand(time(NULL)); // Sets the random seed
 
-	setScene(startSceneID); // Sets the active scene
+	setActiveScene(startSceneID); // Sets the active scene
 
 	// Main Game Loop
 	while (window.isOpen())
@@ -195,7 +184,7 @@ void Game::updateEvents()
 
 void Game::update()
 {
-	activeScene->preUpdate();
+	activeScene->sceneUpdate();
 }
 
 void Game::render()

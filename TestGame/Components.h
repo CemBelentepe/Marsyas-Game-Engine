@@ -157,12 +157,12 @@ public:
 		}
 		if (Input::getKeyDown(Input::Escape))
 		{
-			// float rec = 0;
-			// for (auto f : fpsRecords)
-			// {
-			// 	rec += f / fpsRecords.size();
-			// }
-			// Debug::log("FPS: " + std::to_string(rec));
+			float rec = 0;
+			for (auto f : fpsRecords)
+			{
+				rec += f / fpsRecords.size();
+			}
+			Debug::log("FPS: " + std::to_string(rec));
 			// Game::exitGame();
 			for (auto button : menuButtons)
 			{

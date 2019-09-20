@@ -9,8 +9,8 @@ namespace mge
 {
 	void Scene::updateGameObjects()
 	{
-		this->registerDestroys();
 		this->registerAdds();
+		this->registerDestroys();
 		// TODO: optimize
 		for (size_t i = 0; i < m_GameObjects.size(); i++)
 		{
@@ -106,21 +106,27 @@ namespace mge
 	void Scene::load()
 	{
 		this->start();
+		this->registerAdds();
 		for (auto gameObject : m_GameObjects)
 		{
 			gameObject->init(this);
 		}
 	}
 
-	// void Scene::unload()
-	// {
-	// 	for (auto gameObject : m_GameObjects)
-	// 	{
-	// 		delete gameObject;
-	// 	}
-	// }
+	void Scene::unload()
+	{
+		for (auto gameObject : m_GameObjects)
+		{
+			this->destroyGameObject(gameObject);
+		}
+		for (auto gameObject : m_UIGameObjects)
+		{
+			this->destroyGameObject(gameObject);
+		}
+		this->registerDestroys();
+	}
 
-	void Scene::preUpdate()
+	void Scene::sceneUpdate()
 	{
 		this->updateGameObjects();
 		this->updateCollisions();
@@ -273,5 +279,16 @@ namespace mge
 		}
 		Debug::logError("Game Object with the name x could not have found.");
 		return nullptr;
+	}
+	std::vector<GameObject*> Scene::findGameObjects(sf::String name)
+	{
+		std::vector<GameObject*> gameObjects;
+		for (auto gameObject : m_GameObjects)
+		{
+			if (gameObject->name == name)
+				gameObjects.push_back(gameObject);
+		}
+		Debug::logError("Game Object with the name x could not have found.");
+		return gameObjects;
 	}
 }

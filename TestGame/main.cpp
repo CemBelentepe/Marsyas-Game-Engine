@@ -10,7 +10,7 @@ Scene* scene1;
 int main()
 {
 	Game::createWindow("Game Engine Test", 1200, 900);
-	Game::setFPS(144);
+	//Game::setFPS(144);
 	// Game::showFPS();
 
 	Resources::loadFont("arial", "Resources/arial.ttf");

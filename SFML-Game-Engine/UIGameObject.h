@@ -14,6 +14,13 @@ namespace mge
 		void updateUIComponents();
 	public:
 		UIGameObject(sf::String name): GameObject(name){}
+		~UIGameObject()
+		{
+			for (auto p : UIComponents)
+			{
+				delete p;
+			}
+		}
 
 		void update() override;
 		void render(sf::RenderWindow* window) override;
