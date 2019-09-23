@@ -25,10 +25,10 @@ namespace mge
 
 		virtual void start() {}
 		virtual void update() {}
-		virtual void render(sf::RenderWindow* window) {}
-		virtual void onColliderEnter(UIGameObject* collider) {}
-		virtual void onColliderStay(UIGameObject* collider) {}
-		virtual void onColliderLeave(UIGameObject* collider) {}
+		virtual void render(sf::RenderWindow& window) {}
+		virtual void onColliderEnter(UIGameObject& collider) {}
+		virtual void onColliderStay(UIGameObject& collider) {}
+		virtual void onColliderLeave(UIGameObject& collider) {}
 
 		virtual bool isActive() { return this->enabled; }
 		virtual void setActive(bool active) { this->enabled = active; }

@@ -17,11 +17,11 @@ namespace mge
 		{
 			for (auto comp : this->gameObject->components)
 			{
-				comp->onColliderStay(collider);
+				comp->onColliderStay(*collider);
 
 				if (std::find(lastColliders.begin(), lastColliders.end(), collider) == lastColliders.end())
 				{
-					comp->onColliderEnter(collider);
+					comp->onColliderEnter(*collider);
 				}
 
 			}
@@ -31,11 +31,11 @@ namespace mge
 		{
 			for (auto comp : this->gameObject->components)
 			{
-				comp->onColliderStay(collider);
+				comp->onColliderStay(*collider);
 
 				if (std::find(frameColliders.begin(), frameColliders.end(), collider) == frameColliders.end())
 				{
-					comp->onColliderLeave(collider);
+					comp->onColliderLeave(*collider);
 				}
 
 			}

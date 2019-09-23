@@ -53,7 +53,7 @@ namespace mge
 		for (auto gameObject : m_GameObjects)
 		{
 			if (gameObject->isActive())
-				gameObject->render(this->window);
+				gameObject->render(*window, *mainCam);
 		}
 	}
 
@@ -62,7 +62,7 @@ namespace mge
 		for (auto obj : m_UIGameObjects)
 		{
 			if (obj->isActive())
-				obj->render(this->window);
+				obj->render(*window, *mainCam);
 		}
 	}
 
@@ -96,9 +96,17 @@ namespace mge
 			this->m_GameObjects.push_back(gameObject);
 		}
 		this->m_AddedGameObjects.clear();
+
+
+		for (auto gameObject : m_AddedUIObjects)
+		{
+			gameObject->init(this);
+			this->m_UIGameObjects.push_back(gameObject);
+		}
+		this->m_AddedUIObjects.clear();
 	}
 
-	Scene::Scene(sf::String name) : name(name), window(nullptr), colliderShow(false)
+	Scene::Scene(const sf::String& name) : name(name), window(nullptr), colliderShow(false)
 	{
 		this->m_Colliders = std::vector<Collider*>();
 	}
@@ -124,6 +132,9 @@ namespace mge
 			this->destroyGameObject(gameObject);
 		}
 		this->registerDestroys();
+		this->m_GameObjects.clear();
+		this->m_UIGameObjects.clear();
+		this->m_Colliders.clear();
 	}
 
 	void Scene::sceneUpdate()
@@ -161,10 +172,7 @@ namespace mge
 
 	void Scene::addUIGameObject(UIGameObject* gameObject)
 	{
-		gameObject->scene = this;
-		if (gameObject->renderer)
-			gameObject->renderer->setActive(true);
-		this->m_UIGameObjects.push_back(gameObject);
+		m_AddedUIObjects.push_back(gameObject);
 	}
 
 	void Scene::removeUIGameObject(UIGameObject* gameObject)

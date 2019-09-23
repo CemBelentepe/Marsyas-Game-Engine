@@ -1,4 +1,5 @@
 #pragma once
+#include "Camera.h"
 #include "Math.h"
 
 namespace mge
@@ -24,7 +25,7 @@ namespace mge
 		Vector2f offset;
 		virtual ~Renderer() {}
 
-		virtual void render(sf::RenderWindow* window) = 0;
+		virtual void render(sf::RenderWindow& window, Camera& camera) = 0;
 
 		virtual void setActive(bool isActive) = 0;
 		virtual bool isActive() { return this->enabled; }

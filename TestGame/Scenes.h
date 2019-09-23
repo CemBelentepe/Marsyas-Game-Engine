@@ -8,6 +8,8 @@ public:
 
 	void start() override
 	{
+		this->mainCam = new Camera({ 0, 0}, { 1, 1 }, 0);
+
 		GameObject* player;
 		UIGameObject* scoreText, * resumeButton, * menuButton, * exitButton;
 
@@ -122,6 +124,8 @@ public:
 
 	void start() override
 	{
+		this->mainCam = new Camera({ 0, 0}, { 1, 1 }, 0);
+
 		UIGameObject* startButton = new UIGameObject("startButton");
 		startButton->pos = Vector2f(600, 400);
 		startButton->addUIComponent<Button>();

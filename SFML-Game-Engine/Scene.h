@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Camera.h"
 
 namespace mge
 {
@@ -11,6 +12,7 @@ namespace mge
 	{
 	public:
 		sf::String name;
+		Camera*	mainCam;
 	private:
 		sf::RenderWindow* window;
 
@@ -31,6 +33,8 @@ namespace mge
 		std::vector<UIGameObject*> m_DestroyedUIObjects;
 		std::vector<UIGameObject*> m_RemovedUIObjects;
 
+		std::vector<UIGameObject*> m_AddedUIObjects;
+
 		// Functions
 		void updateGameObjects();
 		void updateGUI();
@@ -48,7 +52,7 @@ namespace mge
 		void registerDestroys();
 		void registerAdds();
 	public:
-		Scene(sf::String name);
+		Scene(const sf::String& name);
 		//~Scene();
 
 		/// <summary>

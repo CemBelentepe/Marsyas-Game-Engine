@@ -1,5 +1,6 @@
 #pragma once
 #include "Debug.h"
+#include "Camera.h"
 #include "Math.h"
 #include <vector>
 
@@ -29,10 +30,10 @@ namespace mge
 
 		std::vector<Component*> components;
 
-		GameObject(sf::String name, Vector2f pos = Vector2f(0, 0));
-		GameObject(sf::String name, sf::String textureName, Vector2f pos = Vector2f(0, 0));
-		GameObject(sf::String name, sf::String textureName, IntRect textureRect, Vector2f pos = Vector2f(0, 0));
-		virtual ~GameObject();
+		GameObject(const sf::String& name, const Vector2f& pos = Vector2f(0, 0));
+		GameObject(const sf::String& name, const sf::String& textureName, const Vector2f& pos = Vector2f(0, 0));
+		GameObject(const sf::String& name, const sf::String& textureName, const IntRect& textureRect, const Vector2f& pos = Vector2f(0, 0));
+		virtual ~GameObject();	   
 
 		template <class T>
 		void addComponent()
@@ -91,7 +92,7 @@ namespace mge
 
 		virtual void init(Scene* scene);
 		virtual void update();
-		virtual void render(sf::RenderWindow* window);
+		virtual void render(sf::RenderWindow& window, Camera& camera);
 
 		virtual void setActive(bool active);
 		virtual bool isActive() { return this->enabled; }

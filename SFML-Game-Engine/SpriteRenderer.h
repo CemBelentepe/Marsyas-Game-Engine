@@ -17,7 +17,7 @@ namespace mge
 		SpriteRenderer(sf::String textureName, IntRect textureRect);
 		~SpriteRenderer();
 
-		void render(sf::RenderWindow* window) override;
+		void render(sf::RenderWindow& window, Camera& camera) override;
 
 		void setActive(bool isActive) override;
 

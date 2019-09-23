@@ -17,7 +17,7 @@ namespace mge
 		//~Image();
 
 		//void update() override;
-		void render(sf::RenderWindow* window) override;
+		void render(sf::RenderWindow& window) override;
 
 		void setTexture(std::string name);
 		const sf::Texture* getTexture() { return this->sprite.getTexture(); }

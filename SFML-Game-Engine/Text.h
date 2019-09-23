@@ -24,7 +24,7 @@ namespace mge
 			color = sf::Color::White;
 		}
 
-		void render(sf::RenderWindow* window);
+		void render(sf::RenderWindow& window);
 
 		void setText(sf::String text);
 		void setFont(std::string name);

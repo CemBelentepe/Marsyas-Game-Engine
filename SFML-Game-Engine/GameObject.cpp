@@ -58,14 +58,14 @@ namespace mge
 		}
 	}
 
-	GameObject::GameObject(sf::String name, Vector2f pos)
+	GameObject::GameObject(const sf::String& name, const Vector2f& pos)
 	{
 		this->initVariables();
 		this->name = name;
 		this->renderer = nullptr;
 	}
 
-	GameObject::GameObject(sf::String name, sf::String textureName, Vector2f pos)
+	GameObject::GameObject(const sf::String& name, const sf::String& textureName, const Vector2f& pos)
 	{
 		this->initVariables();
 		this->name = name;
@@ -76,7 +76,7 @@ namespace mge
 		this->renderer->setRotation(this->rotation);
 	}
 
-	GameObject::GameObject(sf::String name, sf::String textureName, IntRect textureRect, Vector2f pos)
+	GameObject::GameObject(const sf::String& name, const sf::String& textureName, const IntRect& textureRect, const Vector2f& pos)
 	{
 		this->initVariables();
 		this->name = name;
@@ -115,12 +115,12 @@ namespace mge
 		this->updateComponents();
 	}
 
-	void GameObject::render(sf::RenderWindow* window)
+	void GameObject::render(sf::RenderWindow& window, Camera& camera)
 	{
 		this->renderer->setPosition(this->pos);
 		this->renderer->setScale(this->scale);
 		this->renderer->setRotation(this->rotation);
-		this->renderer->render(window);
+		this->renderer->render(window, camera);
 	}
 
 	void GameObject::setActive(bool active)

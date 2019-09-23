@@ -1,7 +1,7 @@
 #include "Image.h"
 #include "Resources.h"
 
-void mge::Image::render(sf::RenderWindow* window)
+void mge::Image::render(sf::RenderWindow& window)
 {
 	// Setting position
 	Vector2f size = ((FloatRect)sprite.getGlobalBounds()).getSize();
@@ -45,7 +45,7 @@ void mge::Image::render(sf::RenderWindow* window)
 
 	sprite.setPosition(pos);
 
-	window->draw(sprite);
+	window.draw(sprite);
 }
 
 void mge::Image::setTexture(std::string name)

@@ -15,9 +15,9 @@ namespace mge
 
 		virtual void start() {}
 		virtual void update() {}
-		virtual void onColliderEnter(GameObject* collider) {}
-		virtual void onColliderStay(GameObject* collider) {}
-		virtual void onColliderLeave(GameObject* collider){}
+		virtual void onColliderEnter(GameObject& collider) {}
+		virtual void onColliderStay(GameObject& collider) {}
+		virtual void onColliderLeave(GameObject& collider){}
 
 		virtual bool isActive() { return this->enabled; }
 		virtual void setActive(bool active) { this->enabled = active; }

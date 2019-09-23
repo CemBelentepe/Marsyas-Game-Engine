@@ -55,7 +55,7 @@ void Game::setActiveScene(int sceneID)
 	{
 		activeScene = scenes.at(sceneID);
 		activeScene->load();
-		if(prevScene)
+		if (prevScene)
 			prevScene->unload();
 	}
 	else
@@ -99,7 +99,7 @@ void Game::startEngine(int startSceneID)
 
 			update(); // Updates the active scene
 		}
-		if ((renderClock.getElapsedTime()).asMicroseconds() >= msFrame || timeScale > 1 ||timeScale == 0)
+		if ((renderClock.getElapsedTime()).asMicroseconds() >= msFrame || timeScale > 1 || timeScale == 0) // TODO Optimize
 		{
 			renderClock.restart();
 

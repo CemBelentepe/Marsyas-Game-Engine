@@ -32,7 +32,7 @@ namespace mge
 		this->updateComponents();
 		this->updateUIComponents();
 	}
-	void UIGameObject::render(sf::RenderWindow* window)
+	void UIGameObject::render(sf::RenderWindow& window, Camera& camera)
 	{
 		for (auto uiComp : UIComponents)
 		{

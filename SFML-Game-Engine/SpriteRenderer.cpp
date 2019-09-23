@@ -23,7 +23,7 @@ namespace mge
 		delete sprite;
 	}
 
-	void SpriteRenderer::render(sf::RenderWindow* window)
+	void SpriteRenderer::render(sf::RenderWindow& window, Camera& camera)
 	{
 		if (enabled)
 		{
@@ -65,11 +65,11 @@ namespace mge
 				this->offset.y -= size.y;
 				break;
 			}
-			this->sprite->setPosition(this->pos + this->offset);
-			this->sprite->setScale(this->scale);
+			this->sprite->setPosition(this->pos + this->offset - camera.pos);
+			this->sprite->setScale(this->scale.x, this->scale.y);
 			this->sprite->setRotation(this->rotation);
 
-			window->draw(*this->sprite);
+			window.draw(*this->sprite);
 		}
 	}
 

@@ -14,9 +14,6 @@
     <Filter Include="GameEngine\Utils">
       <UniqueIdentifier>{ddc9261a-1195-4e7b-8097-8b50a21a7a78}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\Renderers">
-      <UniqueIdentifier>{9fb638af-bb6f-4c7c-bad7-bfb42433a87d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\Resources">
       <UniqueIdentifier>{272350c4-8fd3-4550-a911-c17ae938ae48}</UniqueIdentifier>
     </Filter>
@@ -35,6 +32,9 @@
     <Filter Include="GameEngine\Utils\Math">
       <UniqueIdentifier>{ab47f9d4-5cab-4c05-9f59-87566ceb8b3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\Components\Renderers">
+      <UniqueIdentifier>{9fb638af-bb6f-4c7c-bad7-bfb42433a87d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Debug.cpp">
@@ -44,7 +44,7 @@
       <Filter>GameEngine\Utils</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>GameEngine\Renderers</Filter>
+      <Filter>GameEngine\Components\Renderers</Filter>
     </ClCompile>
     <ClCompile Include="Resources.cpp">
       <Filter>GameEngine\Resources</Filter>
@@ -88,7 +88,7 @@
       <Filter>GameEngine\Utils</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
-      <Filter>GameEngine\Renderers</Filter>
+      <Filter>GameEngine\Components\Renderers</Filter>
     </ClInclude>
     <ClInclude Include="Resources.h">
       <Filter>GameEngine\Resources</Filter>
@@ -103,7 +103,7 @@
       <Filter>GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-      <Filter>GameEngine\Renderers</Filter>
+      <Filter>GameEngine\Components\Renderers</Filter>
     </ClInclude>
     <ClInclude Include="UIComponent.h">
       <Filter>GameEngine\UI</Filter>
@@ -131,6 +131,9 @@
     </ClInclude>
     <ClInclude Include="Image.h">
       <Filter>GameEngine\UI\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>GameEngine\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

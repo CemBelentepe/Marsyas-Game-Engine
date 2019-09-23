@@ -32,6 +32,11 @@ public:
 	float cooldown = .2f;
 	float leftTime = cooldown;
 
+	void start() override
+	{
+		score = 0;
+	}
+
 	void update() override
 	{
 		float speed = 900 * Game::deltaTime;
@@ -61,12 +66,12 @@ public:
 		laser->addComponent<LaserController>();
 	}
 
-	void onColliderEnter(GameObject* collider) override
+	void onColliderEnter(GameObject& collider) override
 	{
-		if (collider->name == "EnemyLaser")
+		if (collider.name == "EnemyLaser")
 		{
 			// Debug::log("Player is dead");
-			Game::getActiveScene()->destroyGameObject(collider);
+			Game::getActiveScene()->destroyGameObject(&collider);
 		}
 	}
 
@@ -102,13 +107,13 @@ public:
 		laser->addComponent<AABBCollider>();
 		laser->addComponent<LaserController>();
 	}
-	void onColliderEnter(GameObject* collider) override
+	void onColliderEnter(GameObject& collider) override
 	{
-		if (collider->name == "PlayerLaser")
+		if (collider.name == "PlayerLaser")
 		{
 			score++;
 			Game::getActiveScene()->destroyGameObject(this->gameObject);
-			Game::getActiveScene()->destroyGameObject(collider);
+			Game::getActiveScene()->destroyGameObject(&collider);
 		}
 	}
 };
@@ -163,7 +168,6 @@ public:
 				rec += f / fpsRecords.size();
 			}
 			Debug::log("FPS: " + std::to_string(rec));
-			// Game::exitGame();
 			for (auto button : menuButtons)
 			{
 				button->setActive(!(button->isActive()));
@@ -171,6 +175,7 @@ public:
 			if (Game::timeScale <= 0.1f) Game::timeScale = 1;
 			else Game::timeScale = 0.1f;
 		}
+
 		sf::String s_score = "Score: " + std::to_string(score);
 		scoreText->setText(s_score);
 	}

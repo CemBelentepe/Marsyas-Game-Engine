@@ -3,7 +3,7 @@
 
 namespace mge
 {
-	void Text::render(sf::RenderWindow* window)
+	void Text::render(sf::RenderWindow& window)
 	{
 		Vector2f size = ((FloatRect)this->sfText.getGlobalBounds()).getSize();
 		size.y *= 2;
@@ -48,7 +48,7 @@ namespace mge
 		this->sfText.setPosition(renderPos);
 		sfText.setFillColor(color);
 
-		window->draw(sfText);
+		window.draw(sfText);
 
 		// To see the outline of the text
 		// sf::RectangleShape rect(size);
