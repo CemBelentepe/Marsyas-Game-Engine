@@ -166,6 +166,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioPlayer.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Debug.cpp">
@@ -186,6 +187,7 @@
     <ClCompile Include="UIGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioPlayer.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />

@@ -27,6 +27,13 @@ namespace mge
 				c->update();
 		}
 	}
+	UIGameObject::~UIGameObject()
+	{
+		for (auto p : UIComponents)
+		{
+			delete p;
+		}
+	}
 	void UIGameObject::update()
 	{
 		this->updateComponents();

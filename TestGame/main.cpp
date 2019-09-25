@@ -15,6 +15,7 @@ int main()
 
 	Resources::loadFont("arial", "Resources/arial.ttf");
 	Resources::loadTexture("button", "Resources/button.png");
+	Resources::loadSound("laser", "Resources/laser.wav");
 
 	Resources::loadTexture("player", "Resources/player.png");
 	Resources::loadTexture("enemy", "Resources/enemy.png");

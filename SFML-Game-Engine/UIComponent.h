@@ -1,10 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Renderer.h"
 
 namespace mge
 {
 	class UIGameObject;
-	class Renderer;
 
 	class UIComponent
 	{

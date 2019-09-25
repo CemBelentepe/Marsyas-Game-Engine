@@ -14,13 +14,7 @@ namespace mge
 		void updateUIComponents();
 	public:
 		UIGameObject(const sf::String& name): GameObject(name){}
-		~UIGameObject()
-		{
-			for (auto p : UIComponents)
-			{
-				delete p;
-			}
-		}
+		~UIGameObject();
 
 		void update() override;
 		void render(sf::RenderWindow& window, Camera& camera) override;

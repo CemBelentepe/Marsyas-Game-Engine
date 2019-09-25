@@ -2,7 +2,6 @@
 #include "UIComponent.h"
 #include <vector>
 #include "Math.h"
-#include "Renderer.h"
 #include "UIGameObject.h"
 
 namespace mge

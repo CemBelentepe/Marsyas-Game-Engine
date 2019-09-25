@@ -64,6 +64,9 @@ public:
 		Game::getActiveScene()->addGameObject(laser);
 		laser->addComponent<AABBCollider>();
 		laser->addComponent<LaserController>();
+		laser->addComponent<AudioPlayer>();
+		laser->getComponent<AudioPlayer>()->setAudio("laser");
+		laser->getComponent<AudioPlayer>()->playOnStart = true;
 	}
 
 	void onColliderEnter(GameObject& collider) override

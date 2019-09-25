@@ -9,10 +9,9 @@ namespace mge
 	private:
 		sf::String textureName;
 		IntRect textureRect;
-
-	public:
 		sf::Sprite* sprite;
 
+	public:
 		SpriteRenderer(sf::String textureName);
 		SpriteRenderer(sf::String textureName, IntRect textureRect);
 		~SpriteRenderer();

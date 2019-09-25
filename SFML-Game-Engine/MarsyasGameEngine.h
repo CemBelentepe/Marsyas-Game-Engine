@@ -10,6 +10,7 @@
 #include "GameObject.h"
 #include "Component.h"
 #include "Collider.h"
+#include "AudioPlayer.h"
 
 #include "UIGameObject.h"
 #include "UIComponent.h"

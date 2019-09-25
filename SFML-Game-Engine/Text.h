@@ -1,7 +1,6 @@
 #pragma once
 #include "UIComponent.h"
 #include "Math.h"
-#include "Renderer.h"
 #include "Resources.h"
 
 namespace mge
