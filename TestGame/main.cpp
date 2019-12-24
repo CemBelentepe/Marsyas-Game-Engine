@@ -10,6 +10,7 @@ Scene* scene1;
 int main()
 {
 	Game::createWindow("Game Engine Test", 1200, 900);
+	// Game::createWindow("Game Engine Test");
 	// Game::setFPS(144);
 	// Game::showFPS();
 

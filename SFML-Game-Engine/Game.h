@@ -55,7 +55,12 @@ namespace mge
 		/// <param name="title">Title of the window.</param>
 		/// <param name="width">With of the window.</param>
 		/// <param name="height">Height of the window.</param>
-		static void createWindow(const char* title, int width, int height, bool fullscreen = false);
+		static void createWindow(const char* title, int width, int height);
+		/// <summary>
+		/// Creates *the* window for the game as fullscreen.
+		/// </summary>
+		/// <param name="title">Title of the window.</param>
+		static void createWindow(const char* title);
 		/// <summary>
 		/// Starts the game from the startSceneID = 0
 		/// </summary>

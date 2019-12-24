@@ -106,7 +106,7 @@ public:
 		lPos.y += 50;
 
 		GameObject* laser = new GameObject("EnemyLaser", "laserEnemy", lPos);
-		gameObject->scene->addGameObject(laser);
+		gameObject->layer->pushGameObject(laser);
 		laser->addComponent<AABBCollider>();
 		laser->addComponent<LaserController>();
 	}
@@ -175,8 +175,10 @@ public:
 			{
 				button->setActive(!(button->isActive()));
 			}
-			if (Game::timeScale <= 0.1f) Game::timeScale = 1;
-			else Game::timeScale = 0.1f;
+
+			Layer* gameLayer = gameObject->layer->getScene()->getLayer("gameLayer");
+			gameLayer->updateEnabled = !gameLayer->updateEnabled;
+
 		}
 
 		sf::String s_score = "Score: " + std::to_string(score);

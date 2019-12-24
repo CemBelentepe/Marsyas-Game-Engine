@@ -6,7 +6,7 @@
 
 namespace mge
 {
-	class Scene;
+	class Layer;
 	class Component;
 	class Renderer;
 
@@ -22,7 +22,7 @@ namespace mge
 		void updateComponents();
 	public:
 		Renderer* renderer;
-		Scene* scene;
+		Layer* layer;
 		sf::String name;
 		Vector2f pos;
 		Vector2f scale;
@@ -90,7 +90,7 @@ namespace mge
 			return false;
 		}
 
-		virtual void init(Scene* scene);
+		virtual void init(Layer* layer);
 		virtual void update();
 		virtual void render(sf::RenderWindow& window, Camera& camera);
 

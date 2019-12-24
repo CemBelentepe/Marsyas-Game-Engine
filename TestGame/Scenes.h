@@ -8,15 +8,21 @@ public:
 
 	void start() override
 	{
-		this->mainCam = new Camera({ 0, 0}, { 1, 1 }, 0);
+		this->mainCam = new Camera({ 0, 0 }, { 1, 1 }, 0);
+		Layer* gameLayer = this->pushLayer("gameLayer");
+		Layer* menuLayer = this->pushLayer("menuLayer");
+		Layer* controller = this->pushLayer("controller");
+		controller->renderEnabled = false;
 
-		GameObject* player;
+		GameObject* player, * gameController;
 		UIGameObject* scoreText, * resumeButton, * menuButton, * exitButton;
 
 		player = new GameObject("Player", "player", Vector2f(600, 850));
 		player->addComponent<AABBCollider>();
 		player->addComponent<PlayerController>();
-		player->addComponent<GameController>();
+
+		gameController = new GameObject("GameController");
+		gameController->addComponent<GameController>();
 
 		scoreText = new UIGameObject("ScoreText");
 		scoreText->pos = Vector2f(0, 0);
@@ -76,18 +82,18 @@ public:
 		exitButton->getUIComponent<Text>()->setColor(sf::Color::Black);
 
 
-		this->addGameObject(player);
-		this->addUIGameObject(scoreText);
-		this->addUIGameObject(resumeButton);
-		this->addUIGameObject(menuButton);
-		this->addUIGameObject(exitButton);
+		gameLayer->pushGameObject(player);
+		gameLayer->pushUIGameObject(scoreText);
+		menuLayer->pushUIGameObject(resumeButton);
+		menuLayer->pushUIGameObject(menuButton);
+		menuLayer->pushUIGameObject(exitButton);
+		controller->pushGameObject(gameController);
 
 
-		player->getComponent<GameController>()->menuButtons.push_back(resumeButton);
-		player->getComponent<GameController>()->menuButtons.push_back(menuButton);
-		player->getComponent<GameController>()->menuButtons.push_back(exitButton);
-
-		player->getComponent<GameController>()->scoreText = scoreText->getUIComponent<Text>();
+		gameController->getComponent<GameController>()->menuButtons.push_back(resumeButton);
+		gameController->getComponent<GameController>()->menuButtons.push_back(menuButton);
+		gameController->getComponent<GameController>()->menuButtons.push_back(exitButton);
+		gameController->getComponent<GameController>()->scoreText = scoreText->getUIComponent<Text>();
 	}
 
 	void update() override
@@ -97,12 +103,12 @@ public:
 
 	static void resumeGame(GameObject* sender)
 	{
-		for (auto button : Game::getActiveScene()->findGameObject("Player")->getComponent<GameController>()->menuButtons)
+		for (auto button : Game::getActiveScene()->findGameObject("GameController")->getComponent<GameController>()->menuButtons)
 		{
 			button->setActive(!(button->isActive()));
 		}
-		if (Game::timeScale <= 0.1f) Game::timeScale = 1;
-		else Game::timeScale = 0.1f;
+		Layer* gameLayer = sender->layer->getScene()->getLayer("gameLayer");
+		gameLayer->updateEnabled = !gameLayer->updateEnabled;
 	}
 
 	static void openMenu(GameObject* sender)
@@ -124,7 +130,8 @@ public:
 
 	void start() override
 	{
-		this->mainCam = new Camera({ 0, 0}, { 1, 1 }, 0);
+		this->mainCam = new Camera({ 0, 0 }, { 1, 1 }, 0);
+		Layer* menuLayer = this->pushLayer("menuLayer");
 
 		UIGameObject* startButton = new UIGameObject("startButton");
 		startButton->pos = Vector2f(600, 400);
@@ -157,9 +164,9 @@ public:
 		endButton->getUIComponent<Text>()->setText("Exit Game");
 		endButton->getUIComponent<Text>()->setFontSize(36);
 		endButton->getUIComponent<Text>()->setColor(sf::Color::Black);
-		
-		this->addGameObject(endButton);
-		this->addGameObject(startButton);
+
+		menuLayer->pushGameObject(endButton);
+		menuLayer->pushGameObject(startButton);
 	}
 
 	void update() override

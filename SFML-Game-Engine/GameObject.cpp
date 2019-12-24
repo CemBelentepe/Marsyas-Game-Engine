@@ -25,7 +25,7 @@ namespace mge
 			Collider* collider = dynamic_cast<Collider*>(c);
 			if (collider)
 			{
-				this->scene->removeCollider(collider);
+				this->layer->popCollider(collider);
 			}
 		}
 		removedComponents.clear();
@@ -39,7 +39,7 @@ namespace mge
 			Collider* collider = dynamic_cast<Collider*>(c);
 			if (collider)
 			{
-				this->scene->addCollider(collider);
+				this->layer->pushCollider(collider);
 			}
 		}
 
@@ -96,16 +96,16 @@ namespace mge
 		delete renderer;
 	}
 
-	void GameObject::init(Scene* scene)
+	void GameObject::init(Layer* layer)
 	{
-		this->scene = scene;
+		this->layer = layer;
 		if (this->renderer) this->renderer->setActive(this->enabled);
 		for (auto comp : components)
 		{
 			Collider* col = dynamic_cast<Collider*>(comp);
 			if (col)
 			{
-				scene->addCollider(col);
+				layer->pushCollider(col);
 			}
 		}
 	}

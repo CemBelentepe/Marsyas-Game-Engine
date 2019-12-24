@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Camera.h"
+#include "Layer.h"
 
 namespace mge
 {
@@ -12,48 +13,16 @@ namespace mge
 	{
 	public:
 		sf::String name;
-		Camera*	mainCam;
+		Camera* mainCam;
 	private:
 		sf::RenderWindow* window;
 
-		//Game Objects
-		std::vector<GameObject*> m_GameObjects;
-		std::vector<Collider*> m_Colliders;
+		// Layers
+		std::vector<Layer*> layers;
 
-		std::vector<GameObject*> m_DestroyedObjects;
-		std::vector<GameObject*> m_RemovedObjects;
-
-		std::vector<GameObject*> m_AddedGameObjects;
-
-		bool colliderShow;
-
-		// UI Game Objects
-		std::vector<UIGameObject*> m_UIGameObjects;
-
-		std::vector<UIGameObject*> m_DestroyedUIObjects;
-		std::vector<UIGameObject*> m_RemovedUIObjects;
-
-		std::vector<UIGameObject*> m_AddedUIObjects;
-
-		// Functions
-		void updateGameObjects();
-		void updateGUI();
-		void updateCollisions();
-
-		void renderGameObjects();
-		void renderGUI();
-
-		void m_RemoveGameObject(GameObject* gameObject);
-		void m_DestroyGameObject(GameObject* gameObject);
-
-		void m_RemoveUIGameObject(UIGameObject* gameObject);
-		void m_DestroyUIGameObject(UIGameObject* gameObject);
-
-		void registerDestroys();
-		void registerAdds();
 	public:
 		Scene(const sf::String& name);
-		//~Scene();
+		// ~Scene();
 
 		/// <summary>
 		/// Loads the scene.
@@ -86,61 +55,23 @@ namespace mge
 		/// Adds a game object to the scene. Game Object registers at the start of the next update.
 		/// </summary>
 		/// <param name="gameObject">Pointer of the game object to add.</param>
-		void addGameObject(GameObject* gameObject);
-		/// <summary>
-		/// Removes the game object from the scene, doesn't destroys the object. Game Object registers at the start of the next update. Use with a shared pointer maybe, not sure, sorry.
-		/// </summary>
-		/// <param name="gameObject">Pointer of the game object to remove.</param>
-		void removeGameObject(GameObject* gameObject);
+		void addGameObject(GameObject* gameObject, int layerID = 0);
 		/// <summary>
 		/// Removes the game object from the scene, destroys the object. Game Object registers at the start of the next update.
 		/// </summary>
 		/// <param name="gameObject">Pointer of the game object to remove.</param>
-		void destroyGameObject(GameObject* gameObject);
+		void destroyGameObject(GameObject* gameObject, int layerID = 0);
 
 		/// <summary>
 		/// Adds a ui game object to the scene. Game Object registers at the start of the next update.
 		/// </summary>
 		/// <param name="gameObject">Pointer of the game object to add.</param>
-		void addUIGameObject(UIGameObject* gameObject);
-		/// <summary>
-		/// Removes the ui game object from the scene, doesn't destroys the object. Game Object registers at the start of the next update. Use with a shared pointer maybe, not sure, sorry.
-		/// </summary>
-		/// <param name="gameObject">Pointer of the game object to remove.</param>
-		void removeUIGameObject(UIGameObject* gameObject);
+		void addUIGameObject(UIGameObject* gameObject, int layerID = 0);
 		/// <summary>
 		/// Removes the ui game object from the scene, destroys the object. Game Object registers at the start of the next update.
 		/// </summary>
 		/// <param name="gameObject">Pointer of the game object to remove.</param>
-		void destroyUIGameObject(UIGameObject* gameObject);
-
-		/// <summary>
-		/// Sets the game objects of the scene. Removes the old ones on the go. Not safe while in a update.
-		/// </summary>
-		/// <param name="gameObjects"></param>
-		void setGameObjects(std::vector<GameObject*> gameObjects);
-
-		/// <summary>
-		/// Shows the colliders in the game.
-		/// </summary>
-		/// <param name="show">Show/Hide</param>
-		void showColliders(bool show);
-
-		/// <summary>
-		/// Renders the colliders.
-		/// </summary>
-		void renderColliders();
-
-		/// <summary>
-		/// Adds a collider component to the scene.
-		/// </summary>
-		/// <param name="collider">Pointer to the collider.</param>
-		void addCollider(Collider* collider);
-		/// <summary>
-		/// Removes a collider from the scene.
-		/// </summary>
-		/// <param name="collider">Pointer to the collider.</param>
-		void removeCollider(Collider* collider);
+		void destroyUIGameObject(UIGameObject* gameObject, int layerID = 0);
 
 		/// <summary>
 		/// Sets the window of the scene.
@@ -160,5 +91,10 @@ namespace mge
 		/// <param name="name">Name of the game objects.</param>
 		/// <returns>A Vector containing the game objects with the name</returns>
 		std::vector<GameObject*> findGameObjects(sf::String name);
+
+		Layer* pushLayer(sf::String name);
+		void popLayer(sf::String name);
+		Layer* getLayer(int layerID);
+		Layer* getLayer(sf::String name);
 	};
 }

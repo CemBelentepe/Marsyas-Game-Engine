@@ -82,6 +82,9 @@
     <ClCompile Include="AudioPlayer.cpp">
       <Filter>GameEngine\Components\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="Layer.cpp">
+      <Filter>GameEngine\Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="AudioPlayer.h">
       <Filter>GameEngine\Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>GameEngine\Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

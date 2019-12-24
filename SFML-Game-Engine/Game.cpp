@@ -27,16 +27,17 @@ void Game::loadScenes(std::vector<Scene*> scenes)
 	initScenes(scenes);
 }
 
-void Game::createWindow(const char* title, int width, int height, bool fullscreen)
+void Game::createWindow(const char* title, int width, int height)
 {
 	Game::title = title;
-	if (fullscreen)
-	{
-		std::vector<sf::VideoMode> videoModes = sf::VideoMode::getFullscreenModes();
-		Game::window.create(videoModes.at(0), title, sf::Style::Fullscreen);
-	}
-	else
-		Game::window.create(sf::VideoMode(width, height), title, sf::Style::Titlebar | sf::Style::Close);
+	Game::window.create(sf::VideoMode(width, height), title, sf::Style::Titlebar | sf::Style::Close);
+}
+
+void mge::Game::createWindow(const char* title)
+{
+	Game::title = title;
+	std::vector<sf::VideoMode> videoModes = sf::VideoMode::getFullscreenModes();
+	Game::window.create(videoModes[0], title, sf::Style::Fullscreen);
 }
 
 void Game::addScene(Scene* scene)
@@ -191,6 +192,5 @@ void Game::render()
 {
 	window.clear();
 	activeScene->render();
-	activeScene->renderColliders(); // TODO: Delete it before release
 	window.display();
 }

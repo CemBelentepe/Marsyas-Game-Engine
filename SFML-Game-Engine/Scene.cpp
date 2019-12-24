@@ -7,282 +7,69 @@
 
 namespace mge
 {
-	void Scene::updateGameObjects()
+	Scene::Scene(const sf::String& name) : name(name), window(nullptr)
 	{
-		this->registerAdds();
-		this->registerDestroys();
-		// TODO: optimize
-		for (size_t i = 0; i < m_GameObjects.size(); i++)
-		{
-			GameObject* gameObject = m_GameObjects.at(i);
-			if (gameObject->isActive())
-				gameObject->update();
-		}
 	}
-
-	void Scene::updateGUI()
-	{
-		for (auto obj : m_UIGameObjects)
-		{
-			if (obj->isActive())
-				obj->update();
-		}
-	}
-
-	void Scene::updateCollisions()
-	{
-		for (auto collider : this->m_Colliders)
-		{
-			if (collider->gameObject->isActive() && collider->isActive())
-				for (auto collision : this->m_Colliders)
-				{
-					if (collision->gameObject->renderer->isActive() && collider != collision)
-					{
-						if (collider->intersects(collision))
-							collider->colliderUpdate(collision->gameObject);
-						else
-							collider->colliderUpdate(nullptr);
-					}
-				}
-		}
-	}
-
-	void Scene::renderGameObjects()
-	{
-		// TODO: optimize
-		for (auto gameObject : m_GameObjects)
-		{
-			if (gameObject->isActive())
-				gameObject->render(*window, *mainCam);
-		}
-	}
-
-	void Scene::renderGUI()
-	{
-		for (auto obj : m_UIGameObjects)
-		{
-			if (obj->isActive())
-				obj->render(*window, *mainCam);
-		}
-	}
-
-	void Scene::registerDestroys()
-	{
-		for (auto obj : m_DestroyedObjects)
-		{
-			m_DestroyGameObject(obj);
-		}
-		for (auto obj : m_RemovedObjects)
-		{
-			m_RemoveGameObject(obj);
-		}
-		for (auto obj : m_DestroyedUIObjects)
-		{
-			m_DestroyUIGameObject(obj);
-		}
-		for (auto obj : m_RemovedUIObjects)
-		{
-			m_RemoveUIGameObject(obj);
-		}
-		this->m_RemovedObjects.clear();
-		this->m_DestroyedObjects.clear();
-	}
-
-	void Scene::registerAdds()
-	{
-		for (auto gameObject : m_AddedGameObjects)
-		{
-			gameObject->init(this);
-			this->m_GameObjects.push_back(gameObject);
-		}
-		this->m_AddedGameObjects.clear();
-
-
-		for (auto gameObject : m_AddedUIObjects)
-		{
-			gameObject->init(this);
-			this->m_UIGameObjects.push_back(gameObject);
-		}
-		this->m_AddedUIObjects.clear();
-	}
-
-	Scene::Scene(const sf::String& name) : name(name), window(nullptr), colliderShow(false)
-	{
-		this->m_Colliders = std::vector<Collider*>();
-	}
-
 	void Scene::load()
 	{
 		this->start();
-		this->registerAdds();
-		for (auto gameObject : m_GameObjects)
-		{
-			gameObject->init(this);
-		}
-	}
 
+		for (auto& layer : layers)
+			layer->init();
+	}
 	void Scene::unload()
 	{
-		for (auto gameObject : m_GameObjects)
-		{
-			this->destroyGameObject(gameObject);
-		}
-		for (auto gameObject : m_UIGameObjects)
-		{
-			this->destroyGameObject(gameObject);
-		}
-		this->registerDestroys();
-		this->m_GameObjects.clear();
-		this->m_UIGameObjects.clear();
-		this->m_Colliders.clear();
+		layers.clear();
 	}
-
 	void Scene::sceneUpdate()
 	{
-		this->updateGameObjects();
-		this->updateCollisions();
-		this->updateGUI();
+		for (auto& layer : layers)
+			layer->update();
 		this->update();
 	}
-
 	void Scene::render()
 	{
-		this->renderGameObjects();
-		this->renderGUI();
+		for (auto& layer : layers)
+			layer->render(*window, *mainCam);
 	}
-
-	void Scene::addGameObject(GameObject* gameObject)
+	void Scene::addGameObject(GameObject* gameObject, int layerID)
 	{
-		m_AddedGameObjects.push_back(gameObject);
+		if (layers.size() > layerID)
+			layers[layerID]->pushGameObject(gameObject);
+		else
+			Debug::logError("Layer with the id could not found!");
 	}
-
-	void Scene::removeGameObject(GameObject* gameObject)
+	void Scene::destroyGameObject(GameObject* gameObject, int layerID)
 	{
-		if (std::find(m_RemovedObjects.begin(), m_RemovedObjects.end(), gameObject) == m_RemovedObjects.end() &&
-			std::find(m_DestroyedObjects.begin(), m_DestroyedObjects.end(), gameObject) == m_DestroyedObjects.end())
-			this->m_RemovedObjects.push_back(gameObject);
+		if (layers.size() > layerID)
+			layers[layerID]->popGameObject(gameObject);
+		else
+			Debug::logError("Layer with the id could not found!");
 	}
-
-	void Scene::destroyGameObject(GameObject* gameObject)
+	void Scene::addUIGameObject(UIGameObject* gameObject, int layerID)
 	{
-		if (std::find(m_RemovedObjects.begin(), m_RemovedObjects.end(), gameObject) == m_RemovedObjects.end() &&
-			std::find(m_DestroyedObjects.begin(), m_DestroyedObjects.end(), gameObject) == m_DestroyedObjects.end())
-			this->m_DestroyedObjects.push_back(gameObject);
+		if (layers.size() > layerID)
+			layers[layerID]->pushUIGameObject(gameObject);
+		else
+			Debug::logError("Layer with the id could not found!");
 	}
-
-	void Scene::addUIGameObject(UIGameObject* gameObject)
+	void Scene::destroyUIGameObject(UIGameObject* gameObject, int layerID)
 	{
-		m_AddedUIObjects.push_back(gameObject);
+		if (layers.size() > layerID)
+			layers[layerID]->popUIGameObject(gameObject);
+		else
+			Debug::logError("Layer with the id could not found!");
 	}
-
-	void Scene::removeUIGameObject(UIGameObject* gameObject)
-	{
-		if (std::find(m_RemovedUIObjects.begin(), m_RemovedUIObjects.end(), gameObject) == m_RemovedUIObjects.end() &&
-			std::find(m_DestroyedUIObjects.begin(), m_DestroyedUIObjects.end(), gameObject) == m_DestroyedUIObjects.end())
-			this->m_RemovedUIObjects.push_back(gameObject);
-	}
-
-	void Scene::destroyUIGameObject(UIGameObject* gameObject)
-	{
-		if (std::find(m_RemovedUIObjects.begin(), m_RemovedUIObjects.end(), gameObject) == m_RemovedUIObjects.end() &&
-			std::find(m_DestroyedUIObjects.begin(), m_DestroyedUIObjects.end(), gameObject) == m_DestroyedUIObjects.end())
-			this->m_DestroyedUIObjects.push_back(gameObject);
-	}
-
-	void Scene::m_RemoveGameObject(GameObject* gameObject)
-	{
-		for (int i = m_Colliders.size() - 1; i >= 0; i--)
-		{
-			Collider* collider = m_Colliders.at(i);
-			if (collider->gameObject == gameObject)
-			{
-				m_Colliders.erase(m_Colliders.begin() + i);
-			}
-		}
-
-		for (int i = m_GameObjects.size() - 1; i >= 0; i--)
-		{
-			if (m_GameObjects.at(i) == gameObject)
-			{
-				m_GameObjects.erase(m_GameObjects.begin() + i);
-			}
-		}
-	}
-
-	void Scene::m_DestroyGameObject(GameObject* gameObject)
-	{
-		this->m_RemoveGameObject(gameObject);
-		delete gameObject;
-	}
-
-	void Scene::m_RemoveUIGameObject(UIGameObject* gameObject)
-	{
-		for (int i = m_UIGameObjects.size() - 1; i >= 0; i--)
-		{
-			if (m_UIGameObjects.at(i) == gameObject)
-			{
-				m_UIGameObjects.erase(m_UIGameObjects.begin() + i);
-			}
-		}
-	}
-
-	void Scene::m_DestroyUIGameObject(UIGameObject* gameObject)
-	{
-		this->m_RemoveUIGameObject(gameObject);
-		delete gameObject;
-	}
-
-	void Scene::setGameObjects(std::vector<GameObject*> gameObjects)
-	{
-		this->m_GameObjects = gameObjects;
-		for (auto gameObject : gameObjects)
-		{
-			gameObject->scene = this;
-		}
-	}
-
-	void Scene::showColliders(bool show)
-	{
-		this->colliderShow = show;
-	}
-
-	void Scene::renderColliders()
-	{
-		if (colliderShow)
-		{
-			for (auto collider : this->m_Colliders)
-			{
-				sf::RectangleShape box;
-				box.setPosition(collider->gameObject->renderer->getPosition() + collider->gameObject->renderer->offset);
-				box.setSize(collider->gameObject->renderer->getSize());
-				box.setFillColor(sf::Color::Transparent);
-				box.setOutlineThickness(2);
-				box.setOutlineColor(sf::Color::Green);
-				window->draw(box);
-			}
-		}
-	}
-
-	void Scene::addCollider(Collider* collider)
-	{
-		this->m_Colliders.push_back(collider);
-	}
-
-	void Scene::removeCollider(Collider* collider)
-	{
-		m_Colliders.erase(std::remove(m_Colliders.begin(), m_Colliders.end(), collider), m_Colliders.end());
-	}
-
 	void Scene::setWindow(sf::RenderWindow* window)
 	{
 		this->window = window;
 	}
-
 	GameObject* Scene::findGameObject(sf::String name)
 	{
-		for (auto gameObject : m_GameObjects)
+		for (auto& layer : layers)
 		{
-			if (gameObject->name == name)
+			GameObject* gameObject = layer->findGameObject(name);
+			if (gameObject != nullptr)
 				return gameObject;
 		}
 		Debug::logError("Game Object with the name x could not have found.");
@@ -291,12 +78,50 @@ namespace mge
 	std::vector<GameObject*> Scene::findGameObjects(sf::String name)
 	{
 		std::vector<GameObject*> gameObjects;
-		for (auto gameObject : m_GameObjects)
+		for (auto& layer : layers)
 		{
-			if (gameObject->name == name)
-				gameObjects.push_back(gameObject);
+			std::vector<GameObject*> gameObjectsInLayer = layer->findGameObjects(name);
+			if (gameObjectsInLayer.size() > 0)
+				gameObjects.insert(gameObjects.end(), gameObjectsInLayer.begin(), gameObjectsInLayer.end());
 		}
-		Debug::logError("Game Object with the name x could not have found.");
+		Debug::logError("No Game Object with the name x could not have found.");
 		return gameObjects;
+	}
+	Layer* Scene::pushLayer(sf::String name)
+	{
+		Layer* layer = new Layer(name, this);
+		layers.push_back(layer);
+		return layer;
+	}
+	void Scene::popLayer(sf::String name)
+	{
+		size_t pos = -1;
+		for (size_t i = 0; i < layers.size(); i++)
+		{
+			if (layers[i]->name == name) { pos = i; break; }
+		}
+		for (size_t i = pos; i < layers.size() - 1; i++)
+		{
+			layers[i] = layers[i + 1];
+		}
+		layers.pop_back();
+	}
+	Layer* Scene::getLayer(int layerID)
+	{
+		if(layers.size() > layerID)
+			return layers[layerID];
+		else
+		{
+			Debug::logError("Layer with the id does not exist!");
+			return nullptr;
+		}
+	}
+	Layer* Scene::getLayer(sf::String name)
+	{
+		for (int i = 0; i < layers.size(); i++)
+			if (layers[i]->name == name) return layers[i];
+
+		Debug::logError("Layer with the id does not exist!");
+		return nullptr;
 	}
 }
