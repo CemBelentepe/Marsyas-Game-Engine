@@ -65,6 +65,7 @@ namespace mge
 				this->offset.y -= size.y;
 				break;
 			}
+
 			this->sprite->setPosition(this->pos + this->offset - camera.pos);
 			this->sprite->setScale(this->scale.x, this->scale.y);
 			this->sprite->setRotation(this->rotation);

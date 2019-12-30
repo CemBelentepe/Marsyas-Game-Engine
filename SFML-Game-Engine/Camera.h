@@ -5,6 +5,8 @@ namespace mge
 {
 	class Camera
 	{
+	private:
+		// Scale
 	public:
 		Vector2f pos;
 		Vector2f size;

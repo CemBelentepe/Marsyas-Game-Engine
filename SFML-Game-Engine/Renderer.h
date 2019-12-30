@@ -4,7 +4,7 @@
 
 namespace mge
 {
-	enum AlignMode
+	enum class AlignMode
 	{
 		TOP_LEFT, TOP_CENTER, TOP_RIGHT,
 		CENTER_LEFT, CENTER, CENTER_RIGHT,

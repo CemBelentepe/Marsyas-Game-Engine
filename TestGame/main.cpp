@@ -1,5 +1,4 @@
 #include "../SFML-Game-Engine/MarsyasGameEngine.h"
-
 #include "Scenes.h"
 
 using namespace mge;
